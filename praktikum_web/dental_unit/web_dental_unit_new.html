@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Unit Center</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #eef8ff;
+            color: #123;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(0, 35, 65, 0.65), rgba(0, 100, 150, 0.55)),
+                url("background web.JPG"); /* Nama file disesuaikan */
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            width: 90%;
+            margin: 25px auto;
+            padding: 15px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 18px;
+
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #5ee7ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #5ee7ff;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            animation: muncul 1.2s ease;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        .hero h1 span {
+            color: #5ee7ff;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 30px;
+
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            box-shadow: 0 8px 25px rgba(0,114,255,0.4);
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0,114,255,0.6);
+        }
+
+        /* ================= SECTION ================= */
+
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #075985;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #557;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            background: white;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 30px;
+            color: #0369a1;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-box {
+            padding: 35px;
+            border-radius: 25px;
+
+            background: linear-gradient(
+                135deg,
+                #e0f7ff,
+                #ffffff
+            );
+
+            box-shadow: 0 10px 35px rgba(0,100,150,0.12);
+            border-left: 5px solid #00aeea;
+        }
+
+        /* ================= COMPONENT ================= */
+
+        .components {
+            background: #f0faff;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+
+            border-radius: 22px;
+
+            box-shadow: 0 10px 30px rgba(0,80,120,0.1);
+
+            transition: 0.35s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            top: 0;
+            left: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,80,120,0.18);
+        }
+
+        /* Styling Gambar pada Kartu */
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 18px;
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #075985;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ================= SYSTEM ================= */
+
+        .system {
+            background:
+                linear-gradient(135deg, #023047, #0369a1);
+            color: white;
+        }
+
+        .system .section-title h2 {
+            color: white;
+        }
+
+        .system .section-title p {
+            color: #d9f5ff;
+        }
+
+        .flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            padding: 25px 30px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 18px;
+
+            text-align: center;
+            min-width: 160px;
+
+            transition: 0.3s;
+        }
+
+        .flow-box:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: #5ee7ff;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            background: white;
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            padding: 30px 20px;
+            text-align: center;
+
+            border-radius: 20px;
+            background: #f2fbff;
+
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            background: #e0f7ff;
+        }
+
+        .feature .number {
+            font-size: 35px;
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 10px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #021d2d;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer h2 {
+            color: #5ee7ff;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #b9d9e6;
+        }
+
+        /* ================= ANIMATION ================= */
+
+        @keyframes muncul {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .card-container,
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header id="home">
+
+        <nav>
+
+            <div class="logo">
+                DENTAL<span>UNIT</span>
+            </div>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#components">Komponen</a></li>
+                <li><a href="#system">Sistem</a></li>
+            </ul>
+
+        </nav>
+
+        <div class="hero">
+
+            <div class="hero-content">
+
+                <h1>
+                    DENTAL UNIT <span>CENTER</span>
+                </h1>
+
+                <p>
+                    Mengenal lebih dekat teknologi Dental Unit,
+                    komponen penyusunnya, serta sistem kerja yang
+                    mendukung pelayanan kesehatan gigi modern.
+                </p>
+
+                <a href="#about" class="button">
+                    Jelajahi Website ↓
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about" id="about">
+
+        <div class="section-title">
+
+            <h2>Tentang Dental Unit</h2>
+
+            <p>
+                Teknologi pendukung pelayanan kesehatan gigi
+            </p>
+
+        </div>
+
+        <div class="about-container">
+
+            <div class="about-text">
+
+                <h3>Dental Unit sebagai Sistem Terintegrasi</h3>
+
+                <p>
+                    Dental Unit merupakan perangkat yang digunakan
+                    untuk mendukung berbagai tindakan pemeriksaan
+                    dan perawatan gigi. Peralatan ini menggabungkan
+                    beberapa sistem dalam satu unit sehingga dokter
+                    gigi dapat melakukan tindakan secara lebih
+                    terorganisasi dan efisien.
+                </p>
+
+                <br>
+
+                <p>
+                    Setiap bagian memiliki fungsi tertentu dan saling
+                    mendukung, mulai dari sistem kursi pasien,
+                    pencahayaan, suplai air, hingga instrumen
+                    perawatan gigi.
+                </p>
+
+            </div>
+
+            <div class="about-box">
+
+                <h3>Dental Technology</h3>
+
+                <p>
+                    Integrasi teknologi pada Dental Unit membantu
+                    menciptakan lingkungan kerja yang lebih nyaman
+                    bagi operator maupun pasien serta mendukung
+                    proses pelayanan kesehatan gigi.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= COMPONENTS ================= -->
+
+    <section class="components" id="components">
+
+        <div class="section-title">
+
+            <h2>Komponen Utama</h2>
+
+            <p>
+                Bagian-bagian yang terdapat pada Dental Unit
+            </p>
+
+        </div>
+
+        <div class="card-container">
+
+            <div class="card">
+                <img src="kursi dental unit.JPG" alt="Dental Chair" class="card-img">
+                <h3>Dental Chair</h3>
+                <p>
+                    Kursi pasien yang dapat diatur posisinya
+                    untuk memberikan kenyamanan selama tindakan
+                    pemeriksaan dan perawatan.
+                </p>
+            </div>
+
+            <div class="card">
+                <img src="lampu dental.JPG" alt="Operating Light" class="card-img">
+                <h3>Operating Light</h3>
+                <p>
+                    Sistem pencahayaan yang membantu memberikan
+                    penerangan pada area kerja dokter gigi.
+                </p>
+            </div>
+
+            <div class="card">
+                <img src="handpiece.JPG" alt="Handpiece & Instrument" class="card-img">
+                <h3>Handpiece / Instrument</h3>
+                <p>
+                    Instrumen yang digunakan untuk pembersihan,
+                    pemotongan, dan perawatan gigi secara presisi.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💨</div>
+                <h3>Three Way Syringe</h3>
+                <p>
+                    Instrumen yang digunakan untuk memberikan
+                    udara, air, atau kombinasi keduanya.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💧</div>
+                <h3>Water Supply</h3>
+                <p>
+                    Sistem penyedia air untuk mendukung proses
+                    pembersihan dan tindakan perawatan gigi.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚙️</div>
+                <h3>Foot Control</h3>
+                <p>
+                    Pengendali yang digunakan operator untuk
+                    mengoperasikan beberapa instrumen Dental Unit.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SYSTEM ================= -->
+
+    <section class="system" id="system">
+
+        <div class="section-title">
+
+            <h2>Alur Sistem Dental Unit</h2>
+
+            <p>
+                Gambaran sederhana proses kerja sistem
+            </p>
+
+        </div>
+
+        <div class="flow">
+
+            <div class="flow-box">
+                <h3>Power</h3>
+                <p>Sumber daya</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-box">
+                <h3>Control</h3>
+                <p>Pengaturan sistem</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-box">
+                <h3>Instrument</h3>
+                <p>Instrumen kerja</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-box">
+                <h3>Patient</h3>
+                <p>Pelayanan pasien</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features">
+
+        <div class="section-title">
+
+            <h2>Keunggulan Sistem</h2>
+
+            <p>
+                Beberapa aspek penting dalam penggunaan Dental Unit
+            </p>
+
+        </div>
+
+        <div class="feature-container">
+
+            <div class="feature">
+
+                <div class="number">01</div>
+
+                <h3>Kenyamanan</h3>
+
+                <p>
+                    Mendukung posisi pasien selama tindakan.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="number">02</div>
+
+                <h3>Efisiensi</h3>
+
+                <p>
+                    Berbagai fungsi tersedia dalam satu sistem.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="number">03</div>
+
+                <h3>Kontrol</h3>
+
+                <p>
+                    Pengoperasian instrumen dapat dilakukan
+                    secara terintegrasi.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="number">04</div>
+
+                <h3>Teknologi</h3>
+
+                <p>
+                    Menggabungkan berbagai sistem pendukung
+                    pelayanan kesehatan gigi.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h2>DENTAL UNIT CENTER</h2>
+
+        <p>
+            Website pembelajaran teknologi peralatan kesehatan gigi
+        </p>
+
+        <br>
+
+        <p>
+            © 2026 Dental Unit Center
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        // Efek sederhana saat halaman dibuka
+        window.addEventListener("load", function() {
+
+            console.log("Dental Unit Center berhasil dimuat.");
+
+        });
+
+
+        // Efek navbar ketika halaman discroll
+        window.addEventListener("scroll", function() {
+
+            const nav = document.querySelector("nav");
+
+            if (window.scrollY > 80) {
+
+                nav.style.background = "rgba(0, 35, 65, 0.85)";
+
+            } else {
+
+                nav.style.background = "rgba(255,255,255,0.15)";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

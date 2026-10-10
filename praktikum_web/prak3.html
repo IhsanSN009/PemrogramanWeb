@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Praktikum 3 - Menu Makanan</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 25px;
+            background-color: #f4f8fc;
+            color: #243447;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            background-color: white;
+            padding: 25px 15px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #4b91c8;
+        }
+
+        header h1 {
+            color: #174a75;
+            margin-top: 0;
+        }
+
+        header p {
+            color: #65788b;
+            line-height: 1.6;
+        }
+
+        h2 {
+            color: #174a75;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .daftar-makanan {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .kartu {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .kartu:hover {
+            transform: translateY(-5px);
+        }
+
+        .kartu img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .info-makanan {
+            padding: 18px 12px;
+        }
+
+        .info-makanan h3 {
+            margin: 0 0 12px;
+            color: #174a75;
+            font-size: 20px;
+        }
+
+        .harga {
+            color: #16804a;
+            font-weight: bold;
+            font-size: 17px;
+            margin: 0;
+        }
+
+        .tabel-menu {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-bottom: 30px;
+        }
+
+        .tabel-menu th,
+        .tabel-menu td {
+            border: 1px solid #d5e1eb;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .tabel-menu th {
+            background-color: #dceefa;
+            color: #174a75;
+        }
+
+        .tabel-menu tr:nth-child(even) {
+            background-color: #f8fbfe;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #174a75;
+            color: white;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        footer p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+
+            .daftar-makanan {
+                grid-template-columns: 1fr;
+            }
+
+            .kartu img {
+                height: 220px;
+            }
+
+            .tabel-menu th,
+            .tabel-menu td {
+                padding: 10px 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Belajar Gambar dan Tabel HTML</h1>
+            <p>
+                Berikut adalah contoh tampilan gambar,
+                nama menu, dan harga makanan.
+            </p>
+        </header>
+
+        <h2>🍽️ Gambar Menu Makanan</h2>
+
+        <div class="daftar-makanan">
+
+            <!-- Menu Nasi Goreng -->
+            <div class="kartu">
+                <img src="img/nasigoreng.jpg"
+                     alt="Nasi Goreng">
+
+                <div class="info-makanan">
+                    <h3>Nasi Goreng</h3>
+                    <p class="harga">Rp15.000</p>
+                </div>
+            </div>
+
+            <!-- Menu Mie Ayam -->
+            <div class="kartu">
+                <img src="img/mieayam.jpg"
+                     alt="Mie Ayam">
+
+                <div class="info-makanan">
+                    <h3>Mie Ayam</h3>
+                    <p class="harga">Rp12.000</p>
+                </div>
+            </div>
+
+            <!-- Menu Bakso -->
+            <div class="kartu">
+                <img src="img/bakso.jpg"
+                     alt="Bakso">
+
+                <div class="info-makanan">
+                    <h3>Bakso</h3>
+                    <p class="harga">Rp13.000</p>
+                </div>
+            </div>
+
+        </div>
+
+        <h2>📋 Daftar Menu Makanan</h2>
+
+        <table class="tabel-menu">
+            <tr>
+                <th>No.</th>
+                <th>Nama Menu</th>
+                <th>Harga</th>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>Nasi Goreng</td>
+                <td>Rp15.000</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Mie Ayam</td>
+                <td>Rp12.000</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Bakso</td>
+                <td>Rp13.000</td>
+            </tr>
+        </table>
+
+        <footer>
+            <p>
+                Terima kasih telah berkunjung.
+                Selamat menikmati!
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
