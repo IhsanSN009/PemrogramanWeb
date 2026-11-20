@@ -1,0 +1,432 @@
+/* ==========================================================================
+   CALIBRAMED SYSTEM - Modern Medical Tech Dark/Contrast Theme
+   Biomedical Calibration & Hospital Maintenance Management System
+   ========================================================================== */
+
+:root {
+    --bg-main: #0a0e1a;
+    --bg-surface: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-hover: #243248;
+    --bg-input: #0f172a;
+    
+    --border-subtle: #334155;
+    --border-accent: rgba(14, 165, 233, 0.3);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --color-cyan: #06b6d4;
+    --color-blue: #0ea5e9;
+    --color-emerald: #10b981;
+    --color-amber: #f59e0b;
+    --color-rose: #f43f5e;
+    --color-indigo: #6366f1;
+    --color-purple: #a855f7;
+
+    --glow-cyan: 0 0 15px rgba(6, 182, 212, 0.35);
+    --glow-emerald: 0 0 15px rgba(16, 185, 129, 0.35);
+    --glow-amber: 0 0 15px rgba(245, 158, 11, 0.35);
+    --glow-rose: 0 0 15px rgba(244, 63, 94, 0.35);
+}
+
+/* Global Dark & Contrast Overrides */
+body {
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Heebo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.01em;
+}
+
+.container-xxl {
+    background-color: var(--bg-main) !important;
+}
+
+/* Content Area */
+.content {
+    background: radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 40%),
+                var(--bg-main) !important;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background: #0b1120 !important;
+    border-right: 1px solid var(--border-subtle);
+}
+
+.sidebar .navbar-brand h3 {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #38bdf8 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sidebar .navbar .navbar-nav .nav-link {
+    color: var(--text-secondary);
+    border-left: 3px solid transparent;
+    transition: all 0.25s ease;
+    margin-bottom: 2px;
+}
+
+.sidebar .navbar .navbar-nav .nav-link:hover,
+.sidebar .navbar .navbar-nav .nav-link.active {
+    color: #38bdf8 !important;
+    background: rgba(14, 165, 233, 0.12) !important;
+    border-left-color: #38bdf8 !important;
+}
+
+.sidebar .navbar .navbar-nav .nav-link i {
+    background: rgba(255, 255, 255, 0.05);
+    color: #38bdf8;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar .navbar .navbar-nav .nav-link:hover i,
+.sidebar .navbar .navbar-nav .nav-link.active i {
+    background: #0ea5e9;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+}
+
+/* Sticky Navbar */
+.content .navbar {
+    background: #0f172a !important;
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.content .navbar .navbar-nav .nav-link {
+    color: var(--text-secondary) !important;
+}
+
+.content .navbar .navbar-nav .nav-link:hover {
+    color: #38bdf8 !important;
+}
+
+.content .navbar .sidebar-toggler,
+.content .navbar .navbar-nav .nav-link i {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #38bdf8 !important;
+    border: 1px solid var(--border-subtle);
+}
+
+/* Contrast Cards */
+.bg-light, .calibra-card {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    color: var(--text-primary) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.calibra-card:hover {
+    border-color: rgba(14, 165, 233, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* KPI Stat Cards with Glows */
+.kpi-card {
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #1e293b 0%, #151f30 100%) !important;
+    border: 1px solid var(--border-subtle);
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+}
+
+.kpi-total::before { background: var(--color-cyan); box-shadow: var(--glow-cyan); }
+.kpi-fit::before { background: var(--color-emerald); box-shadow: var(--glow-emerald); }
+.kpi-maint::before { background: var(--color-amber); box-shadow: var(--glow-amber); }
+.kpi-unfit::before { background: var(--color-rose); box-shadow: var(--glow-rose); }
+.kpi-clients::before { background: var(--color-indigo); }
+
+.kpi-icon-wrap {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+
+.kpi-cyan { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+.kpi-emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.kpi-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+.kpi-rose { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+.kpi-indigo { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+
+/* Status Badges */
+.badge-status {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.badge-layak {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.badge-bersyarat {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.badge-rusak {
+    background: rgba(244, 63, 94, 0.2);
+    color: #fda4af;
+    border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.badge-ready {
+    background: rgba(6, 182, 212, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(6, 182, 212, 0.4);
+}
+
+.badge-maint {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.badge-quarantine {
+    background: rgba(244, 63, 94, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.badge-type-preventif {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-type-kolektif {
+    background: rgba(168, 85, 247, 0.18);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.badge-type-korektif {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.badge-type-legal {
+    background: rgba(16, 185, 129, 0.18);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* Tables in Dark Contrast */
+.table {
+    color: var(--text-primary) !important;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #151e2e !important;
+    color: #94a3b8 !important;
+    border-bottom: 2px solid var(--border-subtle) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    letter-spacing: 0.5px;
+    padding: 0.9rem 0.75rem;
+}
+
+.table tbody tr {
+    background-color: #1e293b;
+    border-bottom: 1px solid #273549;
+    transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #273549 !important;
+}
+
+.table td {
+    padding: 0.85rem 0.75rem;
+    border-color: #273549 !important;
+}
+
+/* Filter Controls */
+.filter-bar {
+    background: #141d2d;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.form-select, .form-control {
+    background-color: #0f172a !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: #f8fafc !important;
+    border-radius: 8px;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25) !important;
+}
+
+.form-select option {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+/* Schedule Matrix Card */
+.schedule-pill-box {
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.25rem;
+    background: #172133;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    height: 100%;
+}
+
+.schedule-pill-box:hover {
+    border-color: #0ea5e9;
+    transform: translateY(-2px);
+}
+
+.schedule-badge-cycle {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Modals */
+.modal-content {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-subtle) !important;
+}
+
+/* Footer Contrast */
+.content footer, .footer-bar {
+    background-color: #0f172a !important;
+    border-top: 1px solid var(--border-subtle) !important;
+    color: var(--text-muted);
+}
+
+/* Custom Buttons */
+.btn-calibra-primary {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    border: none;
+    color: #ffffff;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(14, 165, 233, 0.35);
+}
+
+.btn-calibra-primary:hover {
+    background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.5);
+}
+
+.btn-calibra-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.35);
+}
+
+.btn-calibra-success:hover {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    color: #ffffff;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    background-color: #1e293b !important;
+    border: 1px solid var(--border-subtle) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dropdown-item {
+    color: #cbd5e1 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #2b3952 !important;
+    color: #38bdf8 !important;
+}
+
+.dropdown-divider {
+    border-color: var(--border-subtle) !important;
+}
+
+/* Pulse animation for urgent calibration */
+.pulse-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(244, 63, 94, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+
+.pulse-green {
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.pulse-amber {
+    background-color: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+}
+
+.pulse-red {
+    background-color: #f43f5e;
+    box-shadow: 0 0 8px #f43f5e;
+}
+
+/* Progress bar contrast */
+.progress {
+    background-color: #0f172a !important;
+    border: 1px solid #334155;
+    height: 8px;
+    border-radius: 10px;
+}

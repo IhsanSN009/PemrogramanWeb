@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>CALIBRAMED - Sistem Manajemen Kalibrasi & Pemeliharaan Alat Kesehatan</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Kalibrasi Alat Kesehatan, Biomedical Engineering, Pemeliharaan Rumah Sakit, Medical Calibration System" name="keywords">
+    <meta content="Sistem Informasi Terpusat Manajemen Kalibrasi, Pemeliharaan Preventif, Korektif, dan Monitoring Kelayakan Alat Kesehatan Rumah Sakit" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- CalibraMed Modern High-Contrast Stylesheet -->
+    <link href="css/calibramed.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-info" style="width: 3.5rem; height: 3.5rem;" role="status">
+                <span class="sr-only">Memuat CalibraMed System...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar navbar-dark">
+                <a href="index.html" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
+                    <div class="kpi-icon-wrap kpi-cyan me-2" style="width: 38px; height: 38px; font-size: 1.2rem;">
+                        <i class="fa fa-heartbeat"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 text-info fw-bold">CALIBRA<span class="text-light">MED</span></h4>
+                        <small class="text-muted text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px;">Biomedical Tech</small>
+                    </div>
+                </a>
+
+                <div class="d-flex align-items-center ms-4 mb-4 p-2 rounded" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="img/user.jpg" alt="User Profile" style="width: 42px; height: 42px; object-fit: cover;">
+                        <div class="bg-success rounded-circle border border-2 border-dark position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-light" style="font-size: 0.88rem;">Eng. Raditya, ST.</h6>
+                        <span class="badge bg-primary" style="font-size: 0.68rem;">Lead Calibration Eng.</span>
+                    </div>
+                </div>
+
+                <div class="navbar-nav w-100">
+                    <a href="index.html" class="nav-item nav-link active">
+                        <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                    <a href="#section-charts" class="nav-item nav-link">
+                        <i class="fa fa-chart-bar me-2"></i>Grafik RS Klien
+                    </a>
+                    <a href="#section-schedules" class="nav-item nav-link">
+                        <i class="fa fa-calendar-alt me-2"></i>Jadwal Maintenance
+                    </a>
+                    <a href="#section-devices" class="nav-item nav-link">
+                        <i class="fa fa-stethoscope me-2"></i>Monitoring Alat
+                    </a>
+                    <a href="#section-hospitals" class="nav-item nav-link">
+                        <i class="fa fa-hospital me-2"></i>Data Faskes Klien
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="far fa-file-alt me-2"></i>Sertifikat & Dok
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="#" class="dropdown-item">Sertifikat Lulus Kalibrasi</a>
+                            <a href="#" class="dropdown-item">Surat Perintah Kerja (SPK)</a>
+                            <a href="#" class="dropdown-item">Laporan Uji Kelistrikan</a>
+                            <a href="#" class="dropdown-item">SOP Kalibrasi Kemenkes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fast Info Widget -->
+                <div class="mt-4 px-4">
+                    <div class="p-3 rounded" style="background: rgba(14, 165, 233, 0.08); border: 1px dashed rgba(14, 165, 233, 0.3);">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa fa-shield-alt text-info me-2"></i>
+                            <span class="text-light fw-bold" style="font-size: 0.8rem;">ISO 17025 Compliance</span>
+                        </div>
+                        <p class="small text-muted mb-0" style="font-size: 0.72rem;">
+                            Seluruh pengujian tertelusur ke Standar Metrologi Nasional (LK-BPFK/BSN).
+                        </p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand sticky-top px-4 py-2">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-3">
+                    <h4 class="text-info mb-0"><i class="fa fa-heartbeat"></i></h4>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0 me-3">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <!-- Live DateTime Badge -->
+                <div class="d-none d-md-flex align-items-center text-muted small">
+                    <i class="fa fa-clock text-info me-2"></i>
+                    <span id="live-timestamp" class="text-light fw-medium">Kamis, 20 November 2026</span>
+                </div>
+
+                <div class="navbar-nav align-items-center ms-auto">
+                    <!-- Notification / Alert -->
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell text-warning"></i>
+                            <span class="badge rounded-pill bg-danger" style="position: relative; top: -8px; left: -6px; font-size: 0.65rem;">2</span>
+                            <span class="d-none d-lg-inline-flex ms-1">Peringatan Kritis</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end border-0 rounded-3 m-0 p-2" style="width: 320px;">
+                            <div class="p-2 border-bottom border-secondary mb-2">
+                                <h6 class="mb-0 text-light fw-bold"><i class="fa fa-exclamation-triangle text-danger me-2"></i>Peringatan Kalibrasi</h6>
+                                <small class="text-muted">Alat memerlukan tindakan darurat</small>
+                            </div>
+                            <a href="#section-devices" class="dropdown-item py-2 rounded">
+                                <div class="d-flex align-items-start">
+                                    <div class="pulse-indicator pulse-red mt-1"></div>
+                                    <div>
+                                        <div class="fw-bold text-light" style="font-size: 0.8rem;">Mobile X-Ray [RS Premier]</div>
+                                        <small class="text-danger">Kalibrasi Kadaluarsa (Expired)</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#section-devices" class="dropdown-item py-2 rounded">
+                                <div class="d-flex align-items-start">
+                                    <div class="pulse-indicator pulse-amber mt-1"></div>
+                                    <div>
+                                        <div class="fw-bold text-light" style="font-size: 0.8rem;">Autoclave [Klinik Parahita]</div>
+                                        <small class="text-warning">Deviasi Suhu Ekstrem (+6.8°C)</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="text-center pt-2">
+                                <a href="#section-devices" class="small text-info text-decoration-none">Lihat Semua di Tabel Monitoring</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client Hospital Quick Selector -->
+                    <div class="nav-item d-none d-lg-block ms-3">
+                        <span class="badge bg-dark border border-secondary text-info px-3 py-2">
+                            <i class="fa fa-building me-1"></i> Mode Enterprise: 5 RS & 3 Klinik
+                        </span>
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="nav-item dropdown ms-3">
+                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 36px; height: 36px; object-fit: cover;">
+                            <span class="d-none d-lg-inline-flex text-light fw-medium">Raditya Arga</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end border-0 rounded-3 m-0">
+                            <a href="#" class="dropdown-item"><i class="fa fa-user-circle me-2 text-info"></i>Profil Teknisi</a>
+                            <a href="#" class="dropdown-item"><i class="fa fa-cog me-2 text-info"></i>Pengaturan Akun</a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-danger"><i class="fa fa-sign-out-alt me-2"></i>Keluar</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+            <!-- Header Welcome Banner Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="calibra-card rounded-3 p-4" style="background: linear-gradient(135deg, #132238 0%, #1e293b 100%) !important; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="badge bg-info text-dark fw-bold px-2 py-1">CALIBRAMED ENTERPRISE</span>
+                                <span class="badge bg-dark text-info border border-info px-2 py-1">Versi 2.4</span>
+                            </div>
+                            <h3 class="fw-bold text-light mb-1">
+                                Sistem Monitoring Kalibrasi & Manajemen Pemeliharaan Alat Medis
+                            </h3>
+                            <p class="text-secondary mb-0" style="font-size: 0.92rem;">
+                                Platform terintegrasi pemantauan status kelaikan pakai, lokasi ruangan faskes, jadwal inspeksi preventif & korektif, serta progres pengujian multi-rumah sakit secara real-time.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                            <a href="#section-devices" class="btn btn-calibra-primary me-2">
+                                <i class="fa fa-search me-1"></i> Cari Alat
+                            </a>
+                            <a href="#section-schedules" class="btn btn-outline-info">
+                                <i class="fa fa-calendar-check me-1"></i> Jadwal Kerja
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Welcome Banner End -->
+
+            <!-- KPI Summary Cards Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-3">
+                    <!-- Total Alat -->
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-total h-100">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-bold" style="font-size: 0.75rem;">Total Inventaris Alat</span>
+                                    <h3 class="mb-0 fw-bold text-light mt-1">1,420 <span class="fs-6 text-muted fw-normal">Unit</span></h3>
+                                    <div class="small text-info mt-1">
+                                        <i class="fa fa-check me-1"></i>100% Tercatat & Terlabel
+                                    </div>
+                                </div>
+                                <div class="kpi-icon-wrap kpi-cyan">
+                                    <i class="fa fa-laptop-medical"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layak Pakai -->
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-fit h-100">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-bold" style="font-size: 0.75rem;">Kondisi Layak Pakai</span>
+                                    <h3 class="mb-0 fw-bold text-success mt-1">1,235 <span class="fs-6 text-muted fw-normal">Unit</span></h3>
+                                    <div class="small text-success mt-1">
+                                        <i class="fa fa-shield-alt me-1"></i><strong>87.0%</strong> Siap Operasional
+                                    </div>
+                                </div>
+                                <div class="kpi-icon-wrap kpi-emerald">
+                                    <i class="fa fa-check-double"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dalam Maintenance -->
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-maint h-100">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-bold" style="font-size: 0.75rem;">Dalam Maintenance</span>
+                                    <h3 class="mb-0 fw-bold text-warning mt-1">118 <span class="fs-6 text-muted fw-normal">Unit</span></h3>
+                                    <div class="small text-warning mt-1">
+                                        <i class="fa fa-tools me-1"></i><strong>8.3%</strong> Sedang Dikerjakan
+                                    </div>
+                                </div>
+                                <div class="kpi-icon-wrap kpi-amber">
+                                    <i class="fa fa-wrench"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Karantina / Rusak -->
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-unfit h-100">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-bold" style="font-size: 0.75rem;">Tidak Layak / Karantina</span>
+                                    <h3 class="mb-0 fw-bold text-danger mt-1">67 <span class="fs-6 text-muted fw-normal">Unit</span></h3>
+                                    <div class="small text-danger mt-1">
+                                        <i class="fa fa-ban me-1"></i><strong>4.7%</strong> Butuh Tindak Lanjut
+                                    </div>
+                                </div>
+                                <div class="kpi-icon-wrap kpi-rose">
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- KPI Summary Cards End -->
+
+            <!-- Charts Section Start -->
+            <div id="section-charts" class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <!-- Grafik Pengerjaan Tiap Rumah Sakit -->
+                    <div class="col-lg-8">
+                        <div class="calibra-card rounded-3 p-4 h-100">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 border-bottom border-secondary pb-3">
+                                <div>
+                                    <h5 class="mb-0 text-light fw-bold">
+                                        <i class="fa fa-chart-bar text-info me-2"></i>Grafik Pengerjaan & Progres Pemeliharaan per Rumah Sakit
+                                    </h5>
+                                    <small class="text-muted">Perbandingan beban alat ditangani, selesai, masa maintenance, dan karantina</small>
+                                </div>
+                                <div class="mt-2 mt-sm-0">
+                                    <span class="badge bg-dark border border-info text-info">Data Real-Time</span>
+                                </div>
+                            </div>
+                            <div style="position: relative; height: 320px; width: 100%;">
+                                <canvas id="hospital-progress-chart"></canvas>
+                            </div>
+                            <div class="row text-center mt-3 pt-2 border-top border-secondary small text-muted">
+                                <div class="col-3">
+                                    <span class="d-block text-light fw-bold">RSUD Dr. Soetomo</span>
+                                    <span class="text-info">420 Unit Terdaftar</span>
+                                </div>
+                                <div class="col-3">
+                                    <span class="d-block text-light fw-bold">RS Siloam</span>
+                                    <span class="text-info">280 Unit Terdaftar</span>
+                                </div>
+                                <div class="col-3">
+                                    <span class="d-block text-light fw-bold">RS Premier</span>
+                                    <span class="text-info">210 Unit Terdaftar</span>
+                                </div>
+                                <div class="col-3">
+                                    <span class="d-block text-light fw-bold">RS Unair & Mitra</span>
+                                    <span class="text-info">338 Unit Terdaftar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Distribusi Kelaikan & Status -->
+                    <div class="col-lg-4">
+                        <div class="calibra-card rounded-3 p-4 h-100 d-flex flex-column justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom border-secondary pb-3">
+                                <div>
+                                    <h5 class="mb-0 text-light fw-bold">
+                                        <i class="fa fa-chart-pie text-success me-2"></i>Distribusi Kelaikan
+                                    </h5>
+                                    <small class="text-muted">Rasio Kelaikan & Kesiapan Alat</small>
+                                </div>
+                                <span class="badge bg-success">87% Layak</span>
+                            </div>
+                            <div style="position: relative; height: 230px; width: 100%;">
+                                <canvas id="equipment-condition-chart"></canvas>
+                            </div>
+                            <div class="mt-3 p-3 rounded" style="background: rgba(15, 23, 42, 0.7); border: 1px solid #334155;">
+                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                    <span>Tingkat Kepatuhan SLA:</span>
+                                    <span class="text-success fw-bold">96.4% Terpenuhi</span>
+                                </div>
+                                <div class="progress mb-2" style="height: 6px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 96.4%"></div>
+                                </div>
+                                <small class="text-muted d-block text-center" style="font-size: 0.72rem;">
+                                    Standar Akreditasi Kemenkes RI No. 54 Tahun 2015
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Charts Section End -->
+
+            <!-- Schedule & Periodic Maintenance Section Start -->
+            <div id="section-schedules" class="container-fluid pt-4 px-4">
+                <div class="calibra-card rounded-3 p-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 border-bottom border-secondary pb-3">
+                        <div>
+                            <h5 class="mb-0 text-light fw-bold">
+                                <i class="fa fa-calendar-alt text-warning me-2"></i>Matriks Jadwal Kalibrasi & Pemeliharaan Berkala
+                            </h5>
+                            <small class="text-muted">
+                                Pengelompokan siklus inspeksi: <strong>Harian</strong>, <strong>Mingguan</strong>, <strong>Bulanan</strong>, dan <strong>Tahunan (Kalibrasi Metrologis)</strong>
+                            </small>
+                        </div>
+                        <div class="mt-2 mt-md-0">
+                            <span class="badge bg-info text-dark me-2"><i class="fa fa-check-circle me-1"></i>Preventif Rutin</span>
+                            <span class="badge bg-purple text-light" style="background: #a855f7;"><i class="fa fa-layer-group me-1"></i>Kolektif Borongan</span>
+                            <span class="badge bg-danger text-light"><i class="fa fa-exclamation-triangle me-1"></i>Korektif Perbaikan</span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <!-- Siklus Harian -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="schedule-pill-box">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="schedule-badge-cycle bg-primary text-light">Siklus Harian</span>
+                                    <span class="text-info fw-bold small">45 Alat</span>
+                                </div>
+                                <h6 class="text-light fw-bold mb-1">Inspeksi Fungsi & Kebersihan</h6>
+                                <p class="small text-muted mb-3" style="font-size: 0.75rem;">
+                                    Pengecekan baterai, power-on test, display, kabel sensor, kelengkapan paddle defibrillator di IGD & ICU.
+                                </p>
+                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                    <span>Pencapaian Hari Ini:</span>
+                                    <span class="text-light fw-bold">38 / 45 (84%)</span>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 84%"></div>
+                                </div>
+                                <span class="badge bg-dark border border-secondary text-secondary small" style="font-size: 0.7rem;">
+                                    Tipe: Preventif Lapangan
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Siklus Mingguan -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="schedule-pill-box">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="schedule-badge-cycle bg-warning text-dark">Siklus Mingguan</span>
+                                    <span class="text-warning fw-bold small">120 Alat</span>
+                                </div>
+                                <h6 class="text-light fw-bold mb-1">Uji Akurasi & Penggantian Filter</h6>
+                                <p class="small text-muted mb-3" style="font-size: 0.75rem;">
+                                    Pembersihan filter ventilator, flushing saluran air dental unit, kalibrasi internal nol monitor pasien.
+                                </p>
+                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                    <span>Pencapaian Minggu Ini:</span>
+                                    <span class="text-light fw-bold">95 / 120 (79%)</span>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 79%"></div>
+                                </div>
+                                <span class="badge bg-dark border border-secondary text-secondary small" style="font-size: 0.7rem;">
+                                    Tipe: Preventif & Kolektif
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Siklus Bulanan -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="schedule-pill-box">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="schedule-badge-cycle bg-success text-light">Siklus Bulanan</span>
+                                    <span class="text-success fw-bold small">210 Alat</span>
+                                </div>
+                                <h6 class="text-light fw-bold mb-1">Uji Keselamatan Listrik (IEC)</h6>
+                                <p class="small text-muted mb-3" style="font-size: 0.75rem;">
+                                    Pengujian arus bocor grounding & pasien (IEC 62353), validasi flow rate infus pump & syringe pump.
+                                </p>
+                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                    <span>Pencapaian Bulan Ini:</span>
+                                    <span class="text-light fw-bold">182 / 210 (86%)</span>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 86%"></div>
+                                </div>
+                                <span class="badge bg-dark border border-secondary text-secondary small" style="font-size: 0.7rem;">
+                                    Tipe: Electrical Safety Audit
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Siklus Tahunan -->
+                        <div class="col-md-6 col-xl-3">
+                            <div class="schedule-pill-box">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="schedule-badge-cycle bg-danger text-light">Siklus Tahunan</span>
+                                    <span class="text-danger fw-bold small">350 Alat</span>
+                                </div>
+                                <h6 class="text-light fw-bold mb-1">Kalibrasi Legal Metrologis</h6>
+                                <p class="small text-muted mb-3" style="font-size: 0.75rem;">
+                                    Kalibrasi komprehensif tertelusur BPFK/KAN, penerbitan Sertifikat Kalibrasi Resmi & Stiker Laik Pakai.
+                                </p>
+                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                    <span>Realisasi Periode 2026:</span>
+                                    <span class="text-light fw-bold">310 / 350 (88%)</span>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 88%"></div>
+                                </div>
+                                <span class="badge bg-dark border border-secondary text-secondary small" style="font-size: 0.7rem;">
+                                    Tipe: Sertifikasi Hukum Kemenkes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Schedule & Periodic Maintenance Section End -->
+
+            <!-- Main Device Monitoring Table Section Start -->
+            <div id="section-devices" class="container-fluid pt-4 px-4">
+                <div class="calibra-card rounded-3 p-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+                        <div>
+                            <h5 class="mb-0 text-light fw-bold">
+                                <i class="fa fa-stethoscope text-info me-2"></i>Monitoring Status Kelaikan & Jadwal Kalibrasi Alat Medis
+                            </h5>
+                            <small class="text-muted">
+                                Data inventaris real-time meliputi penempatan ruangan, kondisi fisik, kelaikan, status operasional, dan siklus perawatan.
+                            </small>
+                        </div>
+                        <div class="mt-2 mt-md-0 d-flex align-items-center gap-2">
+                            <span id="device-count-badge" class="badge bg-info text-dark px-3 py-2 fw-bold">10 Unit Ditampilkan</span>
+                            <button class="btn btn-sm btn-outline-secondary text-light" onclick="resetFilters()">
+                                <i class="fa fa-sync-alt me-1"></i>Reset Filter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Control Bar -->
+                    <div class="filter-bar">
+                        <div class="row g-2 align-items-center">
+                            <!-- Filter RS / Customer -->
+                            <div class="col-md-3 col-sm-6">
+                                <label class="small text-muted mb-1"><i class="fa fa-hospital me-1 text-info"></i>Rumah Sakit / Klien</label>
+                                <select id="filter-hospital" class="form-select form-select-sm">
+                                    <option value="">Semua Fasilitas Kesehatan</option>
+                                    <option value="RSUD Dr. Soetomo">RSUD Dr. Soetomo</option>
+                                    <option value="RS Siloam Hospitals">RS Siloam Hospitals</option>
+                                    <option value="RS Premier Surabaya">RS Premier Surabaya</option>
+                                    <option value="RS Unair Hospital">RS Unair Hospital</option>
+                                    <option value="RS Mitra Keluarga">RS Mitra Keluarga</option>
+                                    <option value="Klinik Parahita Diagnostic">Klinik Parahita Diagnostic</option>
+                                </select>
+                            </div>
+
+                            <!-- Filter Kondisi Kelaikan -->
+                            <div class="col-md-2 col-sm-6">
+                                <label class="small text-muted mb-1"><i class="fa fa-heartbeat me-1 text-info"></i>Kondisi Kelayakan</label>
+                                <select id="filter-condition" class="form-select form-select-sm">
+                                    <option value="">Semua Kelayakan</option>
+                                    <option value="Layak Pakai">Layak Pakai</option>
+                                    <option value="Layak Bersyarat">Layak Bersyarat</option>
+                                    <option value="Tidak Layak Pakai">Tidak Layak Pakai</option>
+                                </select>
+                            </div>
+
+                            <!-- Filter Status Operasional -->
+                            <div class="col-md-2 col-sm-6">
+                                <label class="small text-muted mb-1"><i class="fa fa-tasks me-1 text-info"></i>Status Operasional</label>
+                                <select id="filter-status" class="form-select form-select-sm">
+                                    <option value="">Semua Status</option>
+                                    <option value="Siap Digunakan">Siap Digunakan</option>
+                                    <option value="Dalam Maintenance">Dalam Maintenance</option>
+                                    <option value="Karantina">Karantina / Rusak</option>
+                                </select>
+                            </div>
+
+                            <!-- Filter Tipe Maintenance -->
+                            <div class="col-md-2 col-sm-6">
+                                <label class="small text-muted mb-1"><i class="fa fa-wrench me-1 text-info"></i>Tipe Pemeliharaan</label>
+                                <select id="filter-type" class="form-select form-select-sm">
+                                    <option value="">Semua Tipe</option>
+                                    <option value="Preventif">Preventif</option>
+                                    <option value="Korektif">Korektif</option>
+                                    <option value="Kolektif">Kolektif</option>
+                                    <option value="Kalibrasi">Kalibrasi Legal</option>
+                                </select>
+                            </div>
+
+                            <!-- Filter Siklus -->
+                            <div class="col-md-1 col-sm-6">
+                                <label class="small text-muted mb-1"><i class="fa fa-clock me-1 text-info"></i>Siklus</label>
+                                <select id="filter-cycle" class="form-select form-select-sm">
+                                    <option value="">Semua</option>
+                                    <option value="Harian">Harian</option>
+                                    <option value="Mingguan">Mingguan</option>
+                                    <option value="Bulanan">Bulanan</option>
+                                    <option value="Tahunan">Tahunan</option>
+                                </select>
+                            </div>
+
+                            <!-- Search Input -->
+                            <div class="col-md-2 col-sm-12">
+                                <label class="small text-muted mb-1"><i class="fa fa-search me-1 text-info"></i>Pencarian Cepat</label>
+                                <input type="text" id="search-device" class="form-control form-control-sm" placeholder="Nama alat, ID, ruangan...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Responsive Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="min-width: 180px;">Alat & Kode Registrasi</th>
+                                    <th scope="col" style="min-width: 140px;">Faskes / Klien</th>
+                                    <th scope="col" style="min-width: 140px;">Ruangan / Unit</th>
+                                    <th scope="col" style="min-width: 150px;">Kondisi & Kelayakan</th>
+                                    <th scope="col" style="min-width: 130px;">Status Operasional</th>
+                                    <th scope="col" style="min-width: 110px;">Tipe Maint.</th>
+                                    <th scope="col" style="min-width: 130px;">Jadwal Perawatan</th>
+                                    <th scope="col" style="min-width: 130px;">Status Kalibrasi</th>
+                                    <th scope="col" style="min-width: 90px;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="device-table-body">
+                                <!-- Populated dynamically by calibramed.js -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table Legend Footnote -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-between mt-3 pt-3 border-top border-secondary text-muted small">
+                        <div class="d-flex flex-wrap align-items-center gap-3">
+                            <span><span class="badge-status badge-layak py-1 px-2 me-1">Layak</span> Siap pakai tanpa kendala</span>
+                            <span><span class="badge-status badge-bersyarat py-1 px-2 me-1">Bersyarat</span> Performa menurun / butuh sparepart</span>
+                            <span><span class="badge-status badge-rusak py-1 px-2 me-1">Tidak Layak</span> Rusak / Berbahaya bagi pasien</span>
+                        </div>
+                        <div class="text-muted mt-2 mt-sm-0">
+                            Terakhir disinkronisasi dengan Database Kalibrasi: <strong>Hari ini, 09:15 WIB</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Device Monitoring Table Section End -->
+
+            <!-- Hospitals & Clinics Clients Overview Section Start -->
+            <div id="section-hospitals" class="container-fluid pt-4 px-4">
+                <div class="calibra-card rounded-3 p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3 border-bottom border-secondary pb-3">
+                        <div>
+                            <h5 class="mb-0 text-light fw-bold">
+                                <i class="fa fa-hospital text-info me-2"></i>Daftar Faskes Klien & Ringkasan Kontrak Servis
+                            </h5>
+                            <small class="text-muted">Manajemen kemitraan B2B rumah sakit & laboratorium diagnostik</small>
+                        </div>
+                        <span class="badge bg-primary">8 Mitra Faskes Aktif</span>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 rounded" style="background: #141d2d; border: 1px solid #334155;">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="text-light fw-bold mb-0">RSUD Dr. Soetomo</h6>
+                                        <small class="text-muted">Tipe A Pendidikan &bull; Surabaya</small>
+                                    </div>
+                                    <span class="badge bg-success">Tier 1 Platinum</span>
+                                </div>
+                                <div class="small text-secondary mb-1">Target Penanganan: <strong class="text-light">420 Alat</strong></div>
+                                <div class="small text-secondary mb-2">Selesai: <strong class="text-success">360 (85.7%)</strong> &bull; Maint: <strong class="text-warning">42</strong></div>
+                                <div class="progress mb-2" style="height: 5px;">
+                                    <div class="progress-bar bg-info" style="width: 85.7%"></div>
+                                </div>
+                                <small class="text-info d-block"><i class="fa fa-user-tie me-1"></i>PIC: Dr. dr. Joni Wahyuhadi, Sp.BS</small>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="p-3 rounded" style="background: #141d2d; border: 1px solid #334155;">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="text-light fw-bold mb-0">RS Siloam Hospitals</h6>
+                                        <small class="text-muted">Swasta Internasional &bull; Surabaya</small>
+                                    </div>
+                                    <span class="badge bg-primary">Tier 1 Gold</span>
+                                </div>
+                                <div class="small text-secondary mb-1">Target Penanganan: <strong class="text-light">280 Alat</strong></div>
+                                <div class="small text-secondary mb-2">Selesai: <strong class="text-success">245 (87.5%)</strong> &bull; Maint: <strong class="text-warning">25</strong></div>
+                                <div class="progress mb-2" style="height: 5px;">
+                                    <div class="progress-bar bg-success" style="width: 87.5%"></div>
+                                </div>
+                                <small class="text-info d-block"><i class="fa fa-user-tie me-1"></i>PIC: dr. Maria Indah, MMRS</small>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="p-3 rounded" style="background: #141d2d; border: 1px solid #334155;">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="text-light fw-bold mb-0">RS Premier Surabaya</h6>
+                                        <small class="text-muted">Swasta Akreditasi JCI &bull; Surabaya</small>
+                                    </div>
+                                    <span class="badge bg-warning text-dark">Urgent Attention</span>
+                                </div>
+                                <div class="small text-secondary mb-1">Target Penanganan: <strong class="text-light">210 Alat</strong></div>
+                                <div class="small text-secondary mb-2">Selesai: <strong class="text-success">180 (85.7%)</strong> &bull; Maint: <strong class="text-warning">20</strong> &bull; Rusak: <strong class="text-danger">10</strong></div>
+                                <div class="progress mb-2" style="height: 5px;">
+                                    <div class="progress-bar bg-warning" style="width: 85.7%"></div>
+                                </div>
+                                <small class="text-info d-block"><i class="fa fa-user-tie me-1"></i>PIC: dr. Hartono Susilo</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hospitals & Clinics Clients Overview Section End -->
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4 pb-4">
+                <div class="footer-bar rounded-top p-4">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6 text-center text-md-start mb-2 mb-md-0">
+                            <span class="text-light fw-bold">CALIBRAMED SYSTEM</span> &copy; 2026. Hak Cipta Dilindungi.
+                            <div class="small text-muted">Aplikasi Pemrograman Web - UTS Pemrograman Web Elektromedik</div>
+                        </div>
+                        <div class="col-12 col-md-6 text-center text-md-end text-muted small">
+                            <span>Sistem Terintegrasi Berbasis Standar Kemenkes RI No. 54/2015 & ISO/IEC 17025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- Modal Detail & Update Status Alat Start -->
+    <div class="modal fade" id="deviceDetailModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title text-light fw-bold" id="modalLabel">
+                            <i class="fa fa-microchip text-info me-2"></i>Detail Spesifikasi & Metrologi Alat
+                        </h5>
+                        <small class="text-muted">Kode Registrasi: <span id="modal-dev-id" class="text-info fw-bold"></span></small>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-3">
+                        <!-- Identitas Alat -->
+                        <div class="col-md-6">
+                            <div class="p-3 rounded h-100" style="background: #141d2d; border: 1px solid #334155;">
+                                <h6 class="text-info border-bottom border-secondary pb-2 mb-3">
+                                    <i class="fa fa-info-circle me-1"></i>Identitas Alat & Lokasi
+                                </h6>
+                                <table class="table table-borderless table-sm small mb-0">
+                                    <tr>
+                                        <td class="text-muted" style="width: 45%;">Nama Alat:</td>
+                                        <td id="modal-dev-name" class="text-light fw-bold"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Nomor Seri (SN):</td>
+                                        <td id="modal-dev-serial" class="text-light"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Rumah Sakit:</td>
+                                        <td id="modal-dev-hospital" class="text-light fw-medium"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Ruangan Penempatan:</td>
+                                        <td><span id="modal-dev-room" class="badge bg-secondary text-info"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Kondisi Fisik:</td>
+                                        <td id="modal-dev-physical" class="text-warning"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Kelayakan Pakai:</td>
+                                        <td><span id="modal-dev-condition" class="badge bg-success"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Status Operasi:</td>
+                                        <td><span id="modal-dev-status" class="badge bg-info text-dark"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Data Kalibrasi & Keselamatan Listrik -->
+                        <div class="col-md-6">
+                            <div class="p-3 rounded h-100" style="background: #141d2d; border: 1px solid #334155;">
+                                <h6 class="text-success border-bottom border-secondary pb-2 mb-3">
+                                    <i class="fa fa-balance-scale me-1"></i>Metrologi & Keselamatan Listrik
+                                </h6>
+                                <table class="table table-borderless table-sm small mb-0">
+                                    <tr>
+                                        <td class="text-muted" style="width: 45%;">No. Sertifikat:</td>
+                                        <td id="modal-dev-calib-cert" class="text-info fw-bold"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Jatuh Tempo Kalibrasi:</td>
+                                        <td id="modal-dev-calib-due" class="text-light"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Deviasi/Error Uji:</td>
+                                        <td id="modal-dev-error" class="text-light fw-bold"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Arus Bocor (Leakage):</td>
+                                        <td id="modal-dev-leakage" class="text-light"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Tipe Perawatan:</td>
+                                        <td id="modal-dev-maint-type" class="text-info"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Siklus Pemeliharaan:</td>
+                                        <td id="modal-dev-cycle" class="text-light"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Teknisi Penanggung Jawab:</td>
+                                        <td id="modal-dev-pic" class="text-light fw-medium"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Formulir Update Cepat Teknisi -->
+                        <div class="col-12 mt-3">
+                            <div class="p-3 rounded" style="background: #182235; border: 1px dashed #38bdf8;">
+                                <h6 class="text-light mb-2"><i class="fa fa-edit text-info me-1"></i>Formulir Tindakan Teknisi (Update Status Cepat)</h6>
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-md-4">
+                                        <label class="small text-muted">Ubah Status Operasional:</label>
+                                        <select id="select-update-status" class="form-select form-select-sm">
+                                            <option value="Siap Digunakan">Siap Digunakan</option>
+                                            <option value="Dalam Maintenance">Dalam Maintenance</option>
+                                            <option value="Karantina / Rusak">Karantina / Rusak</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="small text-muted">Ubah Kondisi Kelaikan:</label>
+                                        <select id="select-update-condition" class="form-select form-select-sm">
+                                            <option value="Layak Pakai">Layak Pakai</option>
+                                            <option value="Layak Bersyarat">Layak Bersyarat</option>
+                                            <option value="Tidak Layak Pakai">Tidak Layak Pakai</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="small text-muted">Catatan Tindakan Teknisi:</label>
+                                        <input type="text" id="update-notes" class="form-control form-control-sm" placeholder="Contoh: Kalibrasi ulang berhasil...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" id="btn-save-status" class="btn btn-calibra-primary btn-sm">
+                        <i class="fa fa-save me-1"></i>Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Detail & Update Status Alat End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- CalibraMed Dynamic Logic -->
+    <script src="js/calibramed.js"></script>
+</body>
+
+</html>
