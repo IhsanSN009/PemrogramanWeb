@@ -1,242 +1,18 @@
 /**
- * CALIBRAMED SYSTEM - Biomedical Calibration & Maintenance Management
- * Interactive Logic, Charts, Dynamic Filtering & Modal Inspector
+ * CALIBRAMED SYSTEM - JavaScript Controller
+ * Chart.js, Live Multi-Search, SweetAlert2 Interactivity, & Modal Handlers
  */
 
-// Dataset Inventaris Alat Medis Lengkap
-const calibraDevices = [
-    {
-        id: "CLM-DFB-014",
-        name: "Defibrillator & Pacer",
-        brand: "Mindray BeneHeart D3",
-        serial: "SN-DFB-99201",
-        hospital: "RSUD Dr. Soetomo",
-        room: "Ruang IGD Resusitasi",
-        condition: "Layak Pakai",
-        physical: "Normal & Terkalibrasi",
-        status: "Siap Digunakan",
-        maintType: "Preventif",
-        cycle: "Bulanan",
-        lastMaint: "15 Okt 2026",
-        nextMaint: "15 Nov 2026",
-        lastCalib: "12 Apr 2026",
-        nextCalib: "12 Apr 2027",
-        calibStatus: "Valid",
-        errorDev: "+0.8% (Toleransi < ±5%)",
-        leakageCurrent: "42 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/04-0992",
-        pic: "Eng. Raditya A."
-    },
-    {
-        id: "CLM-VNT-008",
-        name: "Mechanical Ventilator",
-        brand: "Hamilton C1",
-        serial: "SN-VNT-44102",
-        hospital: "RSUD Dr. Soetomo",
-        room: "Ruang ICU Lantai 3",
-        condition: "Layak Pakai",
-        physical: "Normal & Terkalibrasi",
-        status: "Siap Digunakan",
-        maintType: "Kolektif",
-        cycle: "Mingguan",
-        lastMaint: "14 Nov 2026",
-        nextMaint: "21 Nov 2026",
-        lastCalib: "08 Jan 2026",
-        nextCalib: "08 Jan 2027",
-        calibStatus: "Valid",
-        errorDev: "-1.2% (Toleransi < ±3%)",
-        leakageCurrent: "55 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/01-0412",
-        pic: "Eng. Dimas P."
-    },
-    {
-        id: "CLM-INF-102",
-        name: "Infusion Pump",
-        brand: "Terumo TE-112",
-        serial: "SN-INF-77812",
-        hospital: "RS Siloam Hospitals",
-        room: "Rawat Inap Melati 4",
-        condition: "Layak Bersyarat",
-        physical: "Daya Baterai Cadangan Melemah",
-        status: "Dalam Maintenance",
-        maintType: "Korektif",
-        cycle: "Bulanan",
-        lastMaint: "02 Nov 2026",
-        nextMaint: "02 Des 2026",
-        lastCalib: "18 Mei 2026",
-        nextCalib: "18 Mei 2027",
-        calibStatus: "Valid",
-        errorDev: "+2.1% (Toleransi < ±5%)",
-        leakageCurrent: "35 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/05-1802",
-        pic: "Eng. Farhan H."
-    },
-    {
-        id: "CLM-ECG-031",
-        name: "ECG 12-Lead Diagnostic",
-        brand: "Nihon Kohden Cardiofax M",
-        serial: "SN-ECG-33910",
-        hospital: "RS Siloam Hospitals",
-        room: "Poli Jantung & Vaskular",
-        condition: "Layak Pakai",
-        physical: "Normal & Terkalibrasi",
-        status: "Siap Digunakan",
-        maintType: "Preventif",
-        cycle: "Harian",
-        lastMaint: "19 Nov 2026",
-        nextMaint: "20 Nov 2026",
-        lastCalib: "04 Mar 2026",
-        nextCalib: "04 Mar 2027",
-        calibStatus: "Valid",
-        errorDev: "+0.3% (Toleransi < ±2%)",
-        leakageCurrent: "28 µA (Max: 50 µA)",
-        certNo: "CERT/CAL/2026/03-0391",
-        pic: "Eng. Ihsan S."
-    },
-    {
-        id: "CLM-XRY-002",
-        name: "Mobile Digital X-Ray",
-        brand: "Siemens Polymobil Plus",
-        serial: "SN-XRY-11209",
-        hospital: "RS Premier Surabaya",
-        room: "Ruang Radiologi & Imaging",
-        condition: "Tidak Layak Pakai",
-        physical: "Collimator Error / Kv Output Dropped",
-        status: "Karantina / Rusak",
-        maintType: "Korektif",
-        cycle: "Tahunan",
-        lastMaint: "10 Nov 2026",
-        nextMaint: "Segera / On-going",
-        lastCalib: "14 Nov 2025",
-        nextCalib: "14 Nov 2026 (Expired)",
-        calibStatus: "Expired",
-        errorDev: "-14.5% (Toleransi < ±5%)",
-        leakageCurrent: "180 µA (Max: 100 µA)",
-        certNo: "UNFIT/QUARANTINE-2026/09",
-        pic: "Eng. Suryo T."
-    },
-    {
-        id: "CLM-MON-088",
-        name: "Bedside Patient Monitor",
-        brand: "Philips IntelliVue MX450",
-        serial: "SN-MON-66504",
-        hospital: "RSUD Dr. Soetomo",
-        room: "Kamar Bedah Sentral (OK-04)",
-        condition: "Layak Pakai",
-        physical: "Normal & Terkalibrasi",
-        status: "Siap Digunakan",
-        maintType: "Kolektif",
-        cycle: "Mingguan",
-        lastMaint: "16 Nov 2026",
-        nextMaint: "23 Nov 2026",
-        lastCalib: "20 Feb 2026",
-        nextCalib: "20 Feb 2027",
-        calibStatus: "Valid",
-        errorDev: "+0.5% (Toleransi < ±2%)",
-        leakageCurrent: "31 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/02-0665",
-        pic: "Eng. Raditya A."
-    },
-    {
-        id: "CLM-DNT-004",
-        name: "Dental Unit Smart Chair",
-        brand: "Gnatus S400 Lux",
-        serial: "SN-DNT-55219",
-        hospital: "RS Unair Hospital",
-        room: "Poli Gigi & Mulut",
-        condition: "Layak Bersyarat",
-        physical: "Solenoid Valve Air Bocor Ringan",
-        status: "Dalam Maintenance",
-        maintType: "Preventif",
-        cycle: "Mingguan",
-        lastMaint: "17 Nov 2026",
-        nextMaint: "24 Nov 2026",
-        lastCalib: "10 Jun 2026",
-        nextCalib: "10 Jun 2027",
-        calibStatus: "Valid",
-        errorDev: "+1.0% (Toleransi < ±5%)",
-        leakageCurrent: "49 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/06-0552",
-        pic: "Eng. Dimas P."
-    },
-    {
-        id: "CLM-INC-011",
-        name: "Infant Incubator",
-        brand: "Draeger Isolette 8000",
-        serial: "SN-INC-99321",
-        hospital: "RS Mitra Keluarga",
-        room: "Ruang Perinatologi / NICU",
-        condition: "Layak Pakai",
-        physical: "Normal & Terkalibrasi",
-        status: "Siap Digunakan",
-        maintType: "Kalibrasi Legal",
-        cycle: "Bulanan",
-        lastMaint: "05 Nov 2026",
-        nextMaint: "05 Des 2026",
-        lastCalib: "22 Agt 2026",
-        nextCalib: "22 Agt 2027",
-        calibStatus: "Valid",
-        errorDev: "+0.2°C (Toleransi < ±0.5°C)",
-        leakageCurrent: "38 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/08-0993",
-        pic: "Eng. Farhan H."
-    },
-    {
-        id: "CLM-SYR-045",
-        name: "Syringe Pump Precision",
-        brand: "B. Braun Perfusor Space",
-        serial: "SN-SYR-12340",
-        hospital: "RS Premier Surabaya",
-        room: "Ruang ICU Lantai 2",
-        condition: "Layak Pakai",
-        physical: "Normal & Terkalibrasi",
-        status: "Siap Digunakan",
-        maintType: "Preventif",
-        cycle: "Harian",
-        lastMaint: "19 Nov 2026",
-        nextMaint: "20 Nov 2026",
-        lastCalib: "11 Sep 2026",
-        nextCalib: "11 Sep 2027",
-        calibStatus: "Valid",
-        errorDev: "-0.9% (Toleransi < ±3%)",
-        leakageCurrent: "25 µA (Max: 100 µA)",
-        certNo: "CERT/CAL/2026/09-0123",
-        pic: "Eng. Ihsan S."
-    },
-    {
-        id: "CLM-ATC-003",
-        name: "Autoclave Sterilizer High-Pressure",
-        brand: "Tuttnauer 3870EL",
-        serial: "SN-ATC-88123",
-        hospital: "Klinik Parahita Diagnostic",
-        room: "Laboratorium CSSD & Sterilisasi",
-        condition: "Tidak Layak Pakai",
-        physical: "Sensor Tekanan & Suhu Deviasi Ekstrem",
-        status: "Karantina / Rusak",
-        maintType: "Korektif",
-        cycle: "Bulanan",
-        lastMaint: "01 Nov 2026",
-        nextMaint: "Sedang Dipesankan Sensor",
-        lastCalib: "05 Nov 2025",
-        nextCalib: "05 Nov 2026 (Expired)",
-        calibStatus: "Expired",
-        errorDev: "+6.8°C (Toleransi < ±1.0°C)",
-        leakageCurrent: "120 µA (Max: 100 µA)",
-        certNo: "UNFIT/QUARANTINE-2026/11",
-        pic: "Eng. Suryo T."
-    }
-];
-
-// Document Ready
 $(document).ready(function () {
     initCharts();
-    renderDeviceTable(calibraDevices);
     initFilterHandlers();
     updateLiveClock();
     setInterval(updateLiveClock, 1000);
 });
 
-// Realtime Clock Header
+// ---------------------------------------------------------------------
+// 1. Live Timestamp Clock
+// ---------------------------------------------------------------------
 function updateLiveClock() {
     const now = new Date();
     const options = { 
@@ -248,60 +24,55 @@ function updateLiveClock() {
         minute: '2-digit', 
         second: '2-digit' 
     };
-    $('#live-timestamp').text(now.toLocaleDateString('id-ID', options));
+    $('#live-timestamp').text(now.toLocaleDateString('id-ID', options) + ' WIB');
 }
 
-// Inisialisasi Chart.js
+// ---------------------------------------------------------------------
+// 2. Chart.js Data Visualizations
+// ---------------------------------------------------------------------
 let hospitalChartInstance = null;
 let conditionChartInstance = null;
-let cycleChartInstance = null;
 
 function initCharts() {
-    // 1. Grafik Pengerjaan Tiap Rumah Sakit (Multi-Hospital Progress Bar Chart)
+    // A. Grafik Pengerjaan Tiap Rumah Sakit (10 RS Mitra)
     const ctxHospital = document.getElementById("hospital-progress-chart");
-    if (ctxHospital) {
+    if (ctxHospital && window.hospitalChartData) {
         hospitalChartInstance = new Chart(ctxHospital.getContext("2d"), {
             type: "bar",
             data: {
-                labels: [
-                    "RSUD Dr. Soetomo", 
-                    "RS Siloam", 
-                    "RS Premier", 
-                    "RS Unair", 
-                    "RS Mitra Keluarga"
-                ],
+                labels: window.hospitalChartData.labels,
                 datasets: [
                     {
-                        label: "Total Alat Ditangani",
-                        data: [420, 280, 210, 190, 148],
-                        backgroundColor: "rgba(14, 165, 233, 0.85)",
+                        label: "Target Alat",
+                        data: window.hospitalChartData.targets,
+                        backgroundColor: "rgba(14, 165, 233, 0.75)",
                         borderColor: "#38bdf8",
                         borderWidth: 1,
-                        borderRadius: 4
+                        borderRadius: 3
                     },
                     {
-                        label: "Sudah Ditangani & Layak",
-                        data: [360, 245, 180, 165, 135],
-                        backgroundColor: "rgba(16, 185, 129, 0.85)",
-                        borderColor: "#34d399",
+                        label: "Selesai & Layak",
+                        data: window.hospitalChartData.completed,
+                        backgroundColor: "rgba(34, 197, 94, 0.75)",
+                        borderColor: "#4ade80",
                         borderWidth: 1,
-                        borderRadius: 4
+                        borderRadius: 3
                     },
                     {
-                        label: "Dalam Masa Maintenance",
-                        data: [42, 25, 20, 15, 8],
-                        backgroundColor: "rgba(245, 158, 11, 0.85)",
+                        label: "Maintenance",
+                        data: window.hospitalChartData.maintenance,
+                        backgroundColor: "rgba(245, 158, 11, 0.75)",
                         borderColor: "#fbbf24",
                         borderWidth: 1,
-                        borderRadius: 4
+                        borderRadius: 3
                     },
                     {
-                        label: "Tidak Layak / Karantina",
-                        data: [18, 10, 10, 10, 5],
-                        backgroundColor: "rgba(244, 63, 94, 0.85)",
+                        label: "Karantina / Rusak",
+                        data: window.hospitalChartData.quarantine,
+                        backgroundColor: "rgba(244, 63, 94, 0.75)",
                         borderColor: "#fb7185",
                         borderWidth: 1,
-                        borderRadius: 4
+                        borderRadius: 3
                     }
                 ]
             },
@@ -313,75 +84,10 @@ function initCharts() {
                         position: 'top',
                         labels: {
                             color: '#cbd5e1',
-                            font: { family: 'Heebo', size: 12, weight: '500' },
-                            padding: 15,
-                            usePointStyle: true,
-                            boxWidth: 8
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: '#0f172a',
-                        titleColor: '#38bdf8',
-                        bodyColor: '#f8fafc',
-                        borderColor: '#334155',
-                        borderWidth: 1,
-                        padding: 12,
-                        boxPadding: 6
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#94a3b8', font: { family: 'Heebo' } },
-                        grid: { color: 'rgba(51, 65, 85, 0.4)' }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#94a3b8', font: { family: 'Heebo' } },
-                        grid: { color: 'rgba(51, 65, 85, 0.4)' }
-                    }
-                }
-            }
-        });
-    }
-
-    // 2. Grafik Distribusi Kondisi & Status Alat (Doughnut)
-    const ctxCondition = document.getElementById("equipment-condition-chart");
-    if (ctxCondition) {
-        conditionChartInstance = new Chart(ctxCondition.getContext("2d"), {
-            type: "doughnut",
-            data: {
-                labels: [
-                    "Layak Pakai & Siap Operasional", 
-                    "Preventif Terjadwal", 
-                    "Dalam Maintenance / Perbaikan", 
-                    "Tidak Layak / Karantina"
-                ],
-                datasets: [{
-                    data: [1085, 85, 52, 26],
-                    backgroundColor: [
-                        "#10b981", 
-                        "#0ea5e9", 
-                        "#f59e0b", 
-                        "#f43f5e"
-                    ],
-                    borderColor: "#1e293b",
-                    borderWidth: 3,
-                    hoverOffset: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: '#cbd5e1',
-                            font: { family: 'Heebo', size: 11 },
+                            font: { family: 'Plus Jakarta Sans', size: 11, weight: '500' },
                             padding: 12,
                             usePointStyle: true,
-                            boxWidth: 8
+                            boxWidth: 7
                         }
                     },
                     tooltip: {
@@ -392,60 +98,55 @@ function initCharts() {
                         borderWidth: 1,
                         padding: 10
                     }
-                }
-            }
-        });
-    }
-
-    // 3. Grafik Kepatuhan Siklus Maintenance (Harian, Mingguan, Bulanan, Tahunan)
-    const ctxCycle = document.getElementById("maintenance-cycle-chart");
-    if (ctxCycle) {
-        cycleChartInstance = new Chart(ctxCycle.getContext("2d"), {
-            type: "bar",
-            data: {
-                labels: ["Harian", "Mingguan", "Bulanan", "Tahunan (Kalibrasi)"],
-                datasets: [
-                    {
-                        label: "Target Unit",
-                        data: [45, 120, 210, 350],
-                        backgroundColor: "rgba(99, 102, 241, 0.4)",
-                        borderColor: "#818cf8",
-                        borderWidth: 1,
-                        borderRadius: 4
-                    },
-                    {
-                        label: "Realisasi Selesai",
-                        data: [38, 95, 182, 310],
-                        backgroundColor: "rgba(16, 185, 129, 0.8)",
-                        borderColor: "#34d399",
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: '#cbd5e1',
-                            font: { family: 'Heebo', size: 11 },
-                            usePointStyle: true,
-                            boxWidth: 8
-                        }
-                    }
                 },
                 scales: {
                     x: {
-                        ticks: { color: '#94a3b8' },
-                        grid: { color: 'rgba(51, 65, 85, 0.4)' }
+                        ticks: { color: '#94a3b8', font: { size: 10 } },
+                        grid: { color: 'rgba(51, 65, 85, 0.3)' }
                     },
                     y: {
-                        ticks: { color: '#94a3b8' },
-                        grid: { color: 'rgba(51, 65, 85, 0.4)' }
+                        beginAtZero: true,
+                        ticks: { color: '#94a3b8', font: { size: 10 } },
+                        grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                    }
+                }
+            }
+        });
+    }
+
+    // B. Donut Chart Distribusi Kelaikan
+    const ctxCondition = document.getElementById("equipment-condition-chart");
+    if (ctxCondition && window.conditionCounts) {
+        conditionChartInstance = new Chart(ctxCondition.getContext("2d"), {
+            type: "doughnut",
+            data: {
+                labels: ["Layak Pakai", "Layak Bersyarat", "Karantina / Rusak"],
+                datasets: [{
+                    data: [
+                        window.conditionCounts.layak,
+                        window.conditionCounts.bersyarat,
+                        window.conditionCounts.rusak
+                    ],
+                    backgroundColor: ["#22c55e", "#f59e0b", "#f43f5e"],
+                    borderColor: "#1e293b",
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '72%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#cbd5e1',
+                            font: { family: 'Plus Jakarta Sans', size: 10.5 },
+                            padding: 10,
+                            usePointStyle: true,
+                            boxWidth: 7
+                        }
                     }
                 }
             }
@@ -453,157 +154,61 @@ function initCharts() {
     }
 }
 
-// Render Tabel Inventaris & Monitoring
-function renderDeviceTable(devices) {
-    const tbody = $("#device-table-body");
-    tbody.empty();
-
-    if (devices.length === 0) {
-        tbody.append(`
-            <tr>
-                <td colspan="9" class="text-center py-4 text-muted">
-                    <i class="fa fa-info-circle me-2"></i>Tidak ditemukan alat dengan filter yang dipilih.
-                </td>
-            </tr>
-        `);
-        $("#device-count-badge").text("0 Unit Ditampilkan");
-        return;
-    }
-
-    devices.forEach((dev) => {
-        // Kondisi Badge
-        let condBadgeClass = "badge-layak";
-        let condIcon = "fa-check-circle";
-        if (dev.condition === "Tidak Layak Pakai") {
-            condBadgeClass = "badge-rusak";
-            condIcon = "fa-times-circle";
-        } else if (dev.condition === "Layak Bersyarat") {
-            condBadgeClass = "badge-bersyarat";
-            condIcon = "fa-exclamation-circle";
-        }
-
-        // Status Badge
-        let statusBadgeClass = "badge-ready";
-        if (dev.status === "Dalam Maintenance") {
-            statusBadgeClass = "badge-maint";
-        } else if (dev.status.includes("Karantina")) {
-            statusBadgeClass = "badge-quarantine";
-        }
-
-        // Tipe Badge
-        let typeBadgeClass = "badge-type-preventif";
-        if (dev.maintType === "Kolektif") typeBadgeClass = "badge-type-kolektif";
-        if (dev.maintType === "Korektif") typeBadgeClass = "badge-type-korektif";
-        if (dev.maintType.includes("Kalibrasi")) typeBadgeClass = "badge-type-legal";
-
-        // Cycle Indicator
-        let cycleColor = "text-info";
-        if (dev.cycle === "Harian") cycleColor = "text-primary";
-        if (dev.cycle === "Mingguan") cycleColor = "text-warning";
-        if (dev.cycle === "Bulanan") cycleColor = "text-success";
-        if (dev.cycle === "Tahunan") cycleColor = "text-danger";
-
-        const row = `
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="me-2 text-primary"><i class="fa fa-stethoscope"></i></div>
-                        <div>
-                            <div class="fw-bold text-light">${dev.name}</div>
-                            <small class="text-muted">${dev.brand} &bull; <span class="text-info">${dev.id}</span></small>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="text-light fw-medium">${dev.hospital}</div>
-                </td>
-                <td>
-                    <span class="badge bg-dark border border-secondary text-info px-2 py-1">
-                        <i class="fa fa-map-marker-alt me-1"></i>${dev.room}
-                    </span>
-                </td>
-                <td>
-                    <span class="badge-status ${condBadgeClass}">
-                        <i class="fa ${condIcon}"></i>${dev.condition}
-                    </span>
-                    <div class="small text-muted mt-1" style="font-size:0.75rem;">${dev.physical}</div>
-                </td>
-                <td>
-                    <span class="badge-status ${statusBadgeClass}">
-                        ${dev.status}
-                    </span>
-                </td>
-                <td>
-                    <span class="badge-status ${typeBadgeClass}">
-                        ${dev.maintType}
-                    </span>
-                </td>
-                <td>
-                    <div>
-                        <span class="badge bg-secondary ${cycleColor} px-2 py-1 mb-1">
-                            <i class="fa fa-clock me-1"></i>${dev.cycle}
-                        </span>
-                        <div class="small text-muted" style="font-size:0.72rem;">
-                            Jatuh Tempo: <span class="text-light fw-bold">${dev.nextMaint}</span>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="small text-muted" style="font-size:0.75rem;">
-                        <div>Terakhir: ${dev.lastCalib}</div>
-                        <div>Due: <span class="${dev.calibStatus === 'Expired' ? 'text-danger fw-bold' : 'text-success'}">${dev.nextCalib}</span></div>
-                    </div>
-                </td>
-                <td>
-                    <div class="btn-group">
-                        <button class="btn btn-sm btn-outline-info" onclick="openDetailModal('${dev.id}')" title="Detail Alat">
-                            <i class="fa fa-eye"></i> Detail
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        `;
-        tbody.append(row);
-    });
-
-    $("#device-count-badge").text(`${devices.length} Unit Ditampilkan`);
-}
-
-// Handler Filter & Search
+// ---------------------------------------------------------------------
+// 3. Live Multi-Search & 2-Row Filter Grid Controller
+// ---------------------------------------------------------------------
 function initFilterHandlers() {
     $("#filter-hospital, #filter-condition, #filter-status, #filter-type, #filter-cycle").on("change", applyFilters);
-    $("#search-device").on("input", applyFilters);
+    $("#search-device").on("keyup input", applyFilters);
 }
 
 function applyFilters() {
-    const selectedHospital = $("#filter-hospital").val();
-    const selectedCond = $("#filter-condition").val();
-    const selectedStatus = $("#filter-status").val();
-    const selectedType = $("#filter-type").val();
-    const selectedCycle = $("#filter-cycle").val();
-    const query = $("#search-device").val().toLowerCase().trim();
+    const selectedHospital = ($("#filter-hospital").val() || "").toLowerCase();
+    const selectedCond     = ($("#filter-condition").val() || "").toLowerCase();
+    const selectedStatus   = ($("#filter-status").val() || "").toLowerCase();
+    const selectedType     = ($("#filter-type").val() || "").toLowerCase();
+    const selectedCycle    = ($("#filter-cycle").val() || "").toLowerCase();
+    const query            = ($("#search-device").val() || "").toLowerCase().trim();
 
-    const filtered = calibraDevices.filter((item) => {
-        const matchHosp = !selectedHospital || item.hospital === selectedHospital;
-        const matchCond = !selectedCond || item.condition === selectedCond;
-        const matchStatus = !selectedStatus || item.status.includes(selectedStatus);
-        const matchType = !selectedType || item.maintType.includes(selectedType);
-        const matchCycle = !selectedCycle || item.cycle === selectedCycle;
+    let visibleCount = 0;
 
-        const matchQuery = !query || 
-            item.name.toLowerCase().includes(query) ||
-            item.id.toLowerCase().includes(query) ||
-            item.room.toLowerCase().includes(query) ||
-            item.hospital.toLowerCase().includes(query) ||
-            item.brand.toLowerCase().includes(query);
+    $("#device-table-body tr.device-row").each(function () {
+        const row = $(this);
+        const hosp  = (row.data("hospital") || "").toLowerCase();
+        const cond  = (row.data("condition") || "").toLowerCase();
+        const stat  = (row.data("status") || "").toLowerCase();
+        const type  = (row.data("type") || "").toLowerCase();
+        const cycle = (row.data("cycle") || "").toLowerCase();
 
-        return matchHosp && matchCond && matchStatus && matchType && matchCycle && matchQuery;
+        // Multi-search target text: includes name, code, brand, room, hospital
+        const searchText = (row.data("search") || "").toLowerCase();
+
+        const matchHosp  = !selectedHospital || hosp === selectedHospital;
+        const matchCond  = !selectedCond || cond === selectedCond;
+        const matchStat  = !selectedStatus || stat.includes(selectedStatus);
+        const matchType  = !selectedType || type.includes(selectedType);
+        const matchCycle = !selectedCycle || cycle === selectedCycle;
+        const matchQuery = !query || searchText.includes(query);
+
+        if (matchHosp && matchCond && matchStat && matchType && matchCycle && matchQuery) {
+            row.show();
+            visibleCount++;
+        } else {
+            row.hide();
+        }
     });
 
-    renderDeviceTable(filtered);
+    // Update Counter Badge
+    $("#device-count-badge").text(visibleCount + " Unit Ditampilkan");
+
+    // Tampilkan baris "Tidak Ditemukan" jika kosong
+    if (visibleCount === 0) {
+        $("#no-device-row").removeClass("d-none");
+    } else {
+        $("#no-device-row").addClass("d-none");
+    }
 }
 
-// Reset Filter
 function resetFilters() {
     $("#filter-hospital").val("");
     $("#filter-condition").val("");
@@ -611,61 +216,270 @@ function resetFilters() {
     $("#filter-type").val("");
     $("#filter-cycle").val("");
     $("#search-device").val("");
-    renderDeviceTable(calibraDevices);
-}
-
-// Buka Modal Detail Alat
-function openDetailModal(deviceId) {
-    const dev = calibraDevices.find(d => d.id === deviceId);
-    if (!dev) return;
-
-    $("#modal-dev-id").text(dev.id);
-    $("#modal-dev-name").text(dev.name + " (" + dev.brand + ")");
-    $("#modal-dev-hospital").text(dev.hospital);
-    $("#modal-dev-room").text(dev.room);
-    $("#modal-dev-serial").text(dev.serial);
-    $("#modal-dev-condition").text(dev.condition);
-    $("#modal-dev-physical").text(dev.physical);
-    $("#modal-dev-status").text(dev.status);
-    $("#modal-dev-maint-type").text(dev.maintType);
-    $("#modal-dev-cycle").text(dev.cycle);
-    $("#modal-dev-next-maint").text(dev.nextMaint);
-    $("#modal-dev-calib-cert").text(dev.certNo);
-    $("#modal-dev-calib-due").text(dev.nextCalib);
-    $("#modal-dev-error").text(dev.errorDev);
-    $("#modal-dev-leakage").text(dev.leakageCurrent);
-    $("#modal-dev-pic").text(dev.pic);
-
-    // Setup form edit
-    $("#select-update-status").val(dev.status.includes("Karantina") ? "Karantina / Rusak" : dev.status);
-    $("#select-update-condition").val(dev.condition);
-    $("#btn-save-status").attr("onclick", `saveDeviceStatus('${dev.id}')`);
-
-    const modal = new bootstrap.Modal(document.getElementById('deviceDetailModal'));
-    modal.show();
-}
-
-// Simpan Update Status Alat
-function saveDeviceStatus(deviceId) {
-    const dev = calibraDevices.find(d => d.id === deviceId);
-    if (!dev) return;
-
-    const newStatus = $("#select-update-status").val();
-    const newCond = $("#select-update-condition").val();
-    const notes = $("#update-notes").val();
-
-    dev.status = newStatus;
-    dev.condition = newCond;
-    if (newCond === "Layak Pakai") {
-        dev.physical = "Telah diperbaiki & ditest ulang: " + (notes || "Normal Operasional");
-    } else {
-        dev.physical = notes || dev.physical;
-    }
-
-    // Refresh tabel & modal
     applyFilters();
-    bootstrap.Modal.getInstance(document.getElementById('deviceDetailModal')).hide();
+}
 
-    // Notifikasi toast sederhana
-    alert(`Status ${dev.name} [${dev.id}] berhasil diperbarui menjadi: ${newStatus} (${newCond})`);
+// ---------------------------------------------------------------------
+// 4. Modal Detail Alat & Inspeksi Metrologi
+// ---------------------------------------------------------------------
+function openDetailModal(deviceId) {
+    Swal.fire({
+        title: 'Memuat Data Alat...',
+        allowOutsideClick: false,
+        background: '#1e293b',
+        color: '#f8fafc',
+        didOpen: () => { Swal.showLoading(); }
+    });
+
+    $.ajax({
+        url: 'device_action.php?action=get_device&id=' + deviceId,
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            Swal.close();
+            if (res.status === 'success') {
+                const dev = res.data;
+
+                $('#modal-dev-id').text(dev.device_code);
+                $('#modal-dev-name').text(dev.name + ' (' + dev.brand_model + ')');
+                $('#modal-dev-serial').text(dev.serial_number);
+                $('#modal-dev-hospital').text(dev.hospital_name + ' (' + dev.hospital_city + ')');
+                $('#modal-dev-room').text(dev.room_location);
+                $('#modal-dev-physical').text(dev.physical_note);
+                $('#modal-dev-condition').text(dev.condition_state);
+                $('#modal-dev-status').text(dev.operation_status);
+                $('#modal-dev-cert').text(dev.certificate_number);
+                $('#modal-dev-calib-due').text(dev.next_calibration);
+                $('#modal-dev-error').text(dev.error_deviation);
+                $('#modal-dev-leakage').text(dev.leakage_current);
+                $('#modal-dev-cycle').text(dev.maintenance_cycle + ' (' + dev.maintenance_type + ')');
+                $('#modal-dev-pic').text(dev.pic_engineer);
+                $('#modal-dev-img').attr('src', 'img/devices/' + dev.image_file);
+
+                // Set form input untuk workbench teknisi
+                $('#inspect-device-id').val(dev.id);
+                $('#inspect-status').val(dev.operation_status);
+                $('#inspect-condition').val(dev.condition_state);
+                $('#inspect-physical').val(dev.physical_note);
+                $('#inspect-error').val(dev.error_deviation);
+                $('#inspect-leakage').val(dev.leakage_current);
+
+                // Tampilkan log riwayat
+                const logsList = $('#modal-logs-list');
+                logsList.empty();
+                if (dev.logs && dev.logs.length > 0) {
+                    dev.logs.forEach(log => {
+                        logsList.append(`
+                            <div class="p-2 mb-2 rounded" style="background:#0f172a; border-left: 3px solid #0ea5e9;">
+                                <div class="d-flex justify-content-between small">
+                                    <strong class="text-light">${log.action_type}</strong>
+                                    <span class="text-muted">${log.log_date}</span>
+                                </div>
+                                <div class="small text-secondary">${log.findings} &bull; ${log.action_taken}</div>
+                                <div class="small text-info">Oleh: ${log.tech_name}</div>
+                            </div>
+                        `);
+                    });
+                } else {
+                    logsList.append('<div class="small text-muted">Belum ada riwayat perbaikan tercatat.</div>');
+                }
+
+                const modal = new bootstrap.Modal(document.getElementById('deviceDetailModal'));
+                modal.show();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: res.message,
+                    background: '#1e293b',
+                    color: '#f8fafc'
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error Jaringan',
+                text: 'Tidak dapat menghubungi server lokal.',
+                background: '#1e293b',
+                color: '#f8fafc'
+            });
+        }
+    });
+}
+
+// ---------------------------------------------------------------------
+// 5. Submit Update Hasil Inspeksi Teknisi
+// ---------------------------------------------------------------------
+function submitInspection() {
+    const form = document.getElementById('inspectionForm');
+    const formData = new FormData(form);
+
+    Swal.fire({
+        title: 'Menyimpan Pembaruan...',
+        allowOutsideClick: false,
+        background: '#1e293b',
+        color: '#f8fafc',
+        didOpen: () => { Swal.showLoading(); }
+    });
+
+    $.ajax({
+        url: 'device_action.php?action=update_inspection',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (res) {
+            if (res.status === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: res.message,
+                    background: '#1e293b',
+                    color: '#f8fafc',
+                    timer: 1600,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Memperbarui',
+                    text: res.message,
+                    background: '#1e293b',
+                    color: '#f8fafc'
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Kesalahan Sistem',
+                text: 'Gagal mengirim data inspeksi ke server.',
+                background: '#1e293b',
+                color: '#f8fafc'
+            });
+        }
+    });
+}
+
+// ---------------------------------------------------------------------
+// 6. Submit Tambah Alat Medis Baru
+// ---------------------------------------------------------------------
+function submitNewDevice() {
+    const form = document.getElementById('addDeviceForm');
+    const formData = new FormData(form);
+
+    Swal.fire({
+        title: 'Mendaftarkan Alat...',
+        allowOutsideClick: false,
+        background: '#1e293b',
+        color: '#f8fafc',
+        didOpen: () => { Swal.showLoading(); }
+    });
+
+    $.ajax({
+        url: 'device_action.php?action=add_device',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (res) {
+            if (res.status === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pendaftaran Sukses!',
+                    text: res.message,
+                    background: '#1e293b',
+                    color: '#f8fafc',
+                    confirmButtonColor: '#10b981'
+                }).then(() => {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Menambah Alat',
+                    text: res.message,
+                    background: '#1e293b',
+                    color: '#f8fafc'
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Kesalahan Sistem',
+                text: 'Gagal memproses pendaftaran alat baru.',
+                background: '#1e293b',
+                color: '#f8fafc'
+            });
+        }
+    });
+}
+
+// ---------------------------------------------------------------------
+// 7. Role Switcher Simulator (Khusus Owner)
+// ---------------------------------------------------------------------
+function switchOwnerRole(role, hospitalId) {
+    Swal.fire({
+        title: 'Mengubah Mode Tampilan...',
+        allowOutsideClick: false,
+        background: '#1e293b',
+        color: '#f8fafc',
+        didOpen: () => { Swal.showLoading(); }
+    });
+
+    $.post('device_action.php', {
+        action: 'switch_role',
+        target_role: role,
+        target_hospital_id: hospitalId
+    }, function (res) {
+        if (res.status === 'success') {
+            Swal.fire({
+                icon: 'info',
+                title: 'Mode Berhasil Diubah',
+                text: res.message,
+                background: '#1e293b',
+                color: '#f8fafc',
+                timer: 1300,
+                showConfirmButton: false
+            }).then(() => {
+                location.reload();
+            });
+        }
+    }, 'json');
+}
+
+// ---------------------------------------------------------------------
+// 8. Konfirmasi Logout dengan SweetAlert2
+// ---------------------------------------------------------------------
+function confirmLogout() {
+    Swal.fire({
+        title: 'Konfirmasi Keluar',
+        text: 'Apakah Anda yakin ingin keluar dari CALIBRAMED SYSTEM?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#475569',
+        confirmButtonText: '<i class="fa fa-sign-out-alt me-1"></i> Ya, Keluar',
+        cancelButtonText: 'Batal',
+        background: '#1e293b',
+        color: '#f8fafc'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Mengeluarkan Sesi...',
+                background: '#1e293b',
+                color: '#f8fafc',
+                timer: 900,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'logout.php';
+            });
+        }
+    });
 }
