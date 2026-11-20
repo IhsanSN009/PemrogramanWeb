@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             icon: 'warning',
             title: 'Data Belum Lengkap',
             text: 'Harap masukkan Email/Username dan Password.',
-            background: '#1e293b',
-            color: '#f8fafc',
-            confirmButtonColor: '#0ea5e9'
+            background: '#ffffff',
+            color: '#2a3042',
+            confirmButtonColor: '#00c292'
         });";
     } else {
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? OR username = ?");
@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 icon: 'success',
                 title: 'Autentikasi Berhasil',
                 html: 'Selamat datang kembali,<br><strong>$welcomeName</strong>',
-                background: '#1e293b',
-                color: '#f8fafc',
+                background: '#ffffff',
+                color: '#2a3042',
                 timer: 1600,
                 showConfirmButton: false
             }).then(() => {
@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 icon: 'error',
                 title: 'Akses Ditolak',
                 text: 'Email/Username atau Password tidak sesuai dengan database!',
-                background: '#1e293b',
-                color: '#f8fafc',
-                confirmButtonColor: '#ef4444'
+                background: '#ffffff',
+                color: '#2a3042',
+                confirmButtonColor: '#f46a6a'
             });";
         }
     }
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome & Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -87,9 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <style>
         body {
-            background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-                        #0a0e1a !important;
+            background-color: #f4f6f9 !important;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -97,18 +95,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 1.5rem;
         }
         .login-card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            background-color: #ffffff;
+            border: 1px solid #e9ecf2;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             max-width: 480px;
             width: 100%;
             overflow: hidden;
         }
+        .login-header-purple {
+            background: linear-gradient(135deg, #6f42c1 0%, #1b3d6d 100%);
+            padding: 1.5rem;
+            color: #ffffff;
+            text-align: center;
+        }
         .demo-btn {
-            border: 1px solid #334155;
-            background: #141d2d;
-            color: #cbd5e1;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #475569;
             transition: all 0.2s ease;
             text-align: left;
             font-size: 0.8rem;
@@ -121,89 +125,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: space-between;
         }
         .demo-btn:hover {
-            border-color: #0ea5e9;
-            background: #1e2c45;
-            color: #f8fafc;
+            border-color: #00c292;
+            background: #ffffff;
+            color: #1e293b;
+            box-shadow: 0 2px 6px rgba(0, 194, 146, 0.15);
         }
     </style>
 </head>
 <body>
 
-    <div class="login-card p-4 p-md-5">
-        <!-- Brand Header -->
-        <div class="text-center mb-4">
-            <div class="d-inline-flex align-items-center justify-content-center p-3 rounded-circle mb-2" style="background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3);">
-                <i class="fa fa-heartbeat text-info fa-2x"></i>
+    <div class="login-card">
+        <!-- Dual Header Top Box (Purple to Navy) -->
+        <div class="login-header-purple">
+            <div class="d-inline-flex align-items-center justify-content-center p-2 rounded-circle mb-2" style="background: rgba(255, 255, 255, 0.2); width: 44px; height: 44px;">
+                <i class="fa fa-heartbeat text-white fa-lg"></i>
             </div>
-            <h4 class="fw-bold text-light mb-0">CALIBRA<span class="text-info">MED</span></h4>
-            <div class="small text-muted text-uppercase" style="font-size: 0.72rem; letter-spacing: 1.5px;">
+            <h4 class="fw-bold text-white mb-0">CALIBRAMED</h4>
+            <div class="small text-white-50 text-uppercase" style="font-size: 0.68rem; letter-spacing: 1.5px;">
                 Biomedical Calibration & Hospital Maintenance System
             </div>
         </div>
 
-        <!-- Form Login -->
-        <form method="POST" action="login.php" id="loginForm">
-            <div class="mb-3">
-                <label class="form-label small text-secondary">Email atau Username</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-dark border-secondary text-info"><i class="fa fa-user"></i></span>
-                    <input type="text" name="identifier" id="identifier" class="form-control" placeholder="Contoh: owner@calibramed.com" required>
+        <div class="p-4 p-md-4">
+            <!-- Form Login -->
+            <form method="POST" action="login.php" id="loginForm">
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">Email atau Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted border-end-0"><i class="fa fa-user"></i></span>
+                        <input type="text" name="identifier" id="identifier" class="form-control" placeholder="Contoh: owner@calibramed.com" required>
+                    </div>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">Kata Sandi</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted border-end-0"><i class="fa fa-lock"></i></span>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password..." required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-calibra-primary w-100 py-2 mb-3">
+                    <i class="fa fa-sign-in-alt me-1"></i> Masuk ke Sistem
+                </button>
+            </form>
+
+            <!-- Quick 1-Click Demo Access Box -->
+            <div class="p-3 rounded-3 mt-2 border" style="background: #fbfcfe;">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="small fw-bold text-dark"><i class="fa fa-bolt me-1 text-warning"></i>Akses Cepat 1-Klik (Demo UTS):</span>
+                    <span class="badge bg-light text-muted border" style="font-size: 0.65rem;">Auto-Fill & Login</span>
+                </div>
+                
+                <!-- Button Owner -->
+                <button type="button" class="demo-btn" onclick="quickLogin('owner@calibramed.com', 'owner123')">
+                    <div>
+                        <strong class="text-dark"><i class="fa fa-crown me-1 text-warning"></i>1. OWNER / CEO</strong>
+                        <div class="text-muted" style="font-size: 0.7rem;">Prof. Dr.Eng. Ir. Ihsan Setyo Nugroho</div>
+                    </div>
+                    <span class="badge" style="background:#fff8e8; color:#b78103; border:1px solid #ffe7b3;">Super Admin</span>
+                </button>
+
+                <!-- Button Teknisi -->
+                <button type="button" class="demo-btn" onclick="quickLogin('teknisi@calibramed.com', 'teknisi123')">
+                    <div>
+                        <strong class="text-dark"><i class="fa fa-wrench me-1 text-info"></i>2. TEKNISI PT</strong>
+                        <div class="text-muted" style="font-size: 0.7rem;">Eng. Dimas Prasetyo, S.Tr.TEM</div>
+                    </div>
+                    <span class="badge" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd;">Engineer</span>
+                </button>
+
+                <!-- Button Klien RS -->
+                <button type="button" class="demo-btn" onclick="quickLogin('soetomo@hospital.com', 'klien123')">
+                    <div>
+                        <strong class="text-dark"><i class="fa fa-hospital me-1 text-success"></i>3. KLIEN RS</strong>
+                        <div class="text-muted" style="font-size: 0.7rem;">dr. Hendra (RSUD Dr. Soetomo)</div>
+                    </div>
+                    <span class="badge" style="background:#e8f9f2; color:#008764; border:1px solid #c1edd8;">Hospital</span>
+                </button>
             </div>
 
-            <div class="mb-4">
-                <label class="form-label small text-secondary">Kata Sandi</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-dark border-secondary text-info"><i class="fa fa-lock"></i></span>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password..." required>
-                </div>
+            <!-- Footer Links -->
+            <div class="text-center mt-3 pt-1">
+                <small class="text-muted">
+                    Belum memiliki akun? <a href="register.php" class="text-success text-decoration-none fw-bold">Registrasi Akun Baru</a>
+                </small>
             </div>
-
-            <button type="submit" class="btn btn-calibra-primary w-100 py-2 mb-3">
-                <i class="fa fa-sign-in-alt me-1"></i> Masuk ke Sistem
-            </button>
-        </form>
-
-        <!-- Quick 1-Click Demo Access Box -->
-        <div class="p-3 rounded-3 mt-3" style="background: #141d2d; border: 1px dashed #334155;">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="small fw-bold text-info"><i class="fa fa-bolt me-1 text-warning"></i>Akses Cepat 1-Klik (Demo UTS):</span>
-                <span class="badge bg-dark border border-secondary text-muted" style="font-size: 0.65rem;">Auto-Fill & Login</span>
-            </div>
-            
-            <!-- Button Owner -->
-            <button type="button" class="demo-btn" onclick="quickLogin('owner@calibramed.com', 'owner123')">
-                <div>
-                    <strong class="text-warning"><i class="fa fa-crown me-1"></i>1. OWNER / CEO</strong>
-                    <div class="text-muted" style="font-size: 0.7rem;">Prof. Dr.Eng. Ir. Ihsan Setyo Nugroho</div>
-                </div>
-                <span class="badge bg-warning text-dark">Super Admin</span>
-            </button>
-
-            <!-- Button Teknisi -->
-            <button type="button" class="demo-btn" onclick="quickLogin('teknisi@calibramed.com', 'teknisi123')">
-                <div>
-                    <strong class="text-info"><i class="fa fa-wrench me-1"></i>2. TEKNISI PT</strong>
-                    <div class="text-muted" style="font-size: 0.7rem;">Eng. Dimas Prasetyo, S.Tr.TEM</div>
-                </div>
-                <span class="badge bg-info text-dark">Engineer</span>
-            </button>
-
-            <!-- Button Klien RS -->
-            <button type="button" class="demo-btn" onclick="quickLogin('soetomo@hospital.com', 'klien123')">
-                <div>
-                    <strong class="text-success"><i class="fa fa-hospital me-1"></i>3. KLIEN RS</strong>
-                    <div class="text-muted" style="font-size: 0.7rem;">dr. Hendra (RSUD Dr. Soetomo)</div>
-                </div>
-                <span class="badge bg-success">Hospital</span>
-            </button>
-        </div>
-
-        <!-- Footer Links -->
-        <div class="text-center mt-3 pt-2">
-            <small class="text-muted">
-                Belum memiliki akun? <a href="register.php" class="text-info text-decoration-none fw-medium">Registrasi Akun Baru</a>
-            </small>
         </div>
     </div>
 

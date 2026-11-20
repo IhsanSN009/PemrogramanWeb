@@ -35,33 +35,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             icon: 'warning',
             title: 'Formulir Belum Lengkap',
             text: 'Harap lengkapi semua kolom yang wajib diisi!',
-            background: '#1e293b',
-            color: '#f8fafc',
-            confirmButtonColor: '#0ea5e9'
+            background: '#ffffff',
+            color: '#2a3042',
+            confirmButtonColor: '#00c292'
         });";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $alertScript = "Swal.fire({
             icon: 'error',
             title: 'Format Email Tidak Valid',
             text: 'Masukkan alamat email yang valid!',
-            background: '#1e293b',
-            color: '#f8fafc'
+            background: '#ffffff',
+            color: '#2a3042'
         });";
     } elseif ($password !== $confirm_pass) {
         $alertScript = "Swal.fire({
             icon: 'error',
             title: 'Password Tidak Cocok',
             text: 'Konfirmasi password tidak sama dengan password awal!',
-            background: '#1e293b',
-            color: '#f8fafc'
+            background: '#ffffff',
+            color: '#2a3042'
         });";
     } elseif (strlen($password) < 6) {
         $alertScript = "Swal.fire({
             icon: 'warning',
             title: 'Password Kurang Kuat',
             text: 'Password minimal terdiri dari 6 karakter.',
-            background: '#1e293b',
-            color: '#f8fafc'
+            background: '#ffffff',
+            color: '#2a3042'
         });";
     } else {
         // Cek apakah email sudah terdaftar
@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 icon: 'error',
                 title: 'Email Sudah Terdaftar',
                 text: 'Email ini sudah digunakan oleh akun lain, silakan gunakan email lain atau login.',
-                background: '#1e293b',
-                color: '#f8fafc'
+                background: '#ffffff',
+                color: '#2a3042'
             });";
         } else {
             // Pastikan username unik
@@ -108,9 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 icon: 'success',
                 title: 'Registrasi Berhasil!',
                 html: 'Akun Anda berhasil dibuat dengan username: <strong>$username</strong>.<br>Silakan login.',
-                background: '#1e293b',
-                color: '#f8fafc',
-                confirmButtonColor: '#10b981'
+                background: '#ffffff',
+                color: '#2a3042',
+                confirmButtonColor: '#00c292'
             }).then(() => {
                 window.location.href = 'login.php';
             });";
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome & Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -144,9 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <style>
         body {
-            background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-                        #0a0e1a !important;
+            background-color: #f4f6f9 !important;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -154,98 +152,107 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 1.5rem;
         }
         .register-card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            max-width: 540px;
+            background-color: #ffffff;
+            border: 1px solid #e9ecf2;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            max-width: 520px;
             width: 100%;
+            overflow: hidden;
+        }
+        .register-header-purple {
+            background: linear-gradient(135deg, #6f42c1 0%, #00c292 100%);
+            padding: 1.5rem;
+            color: #ffffff;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="register-card p-4 p-md-5">
-        <!-- Brand Header -->
-        <div class="text-center mb-4">
-            <div class="d-inline-flex align-items-center justify-content-center p-3 rounded-circle mb-2" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3);">
-                <i class="fa fa-user-plus text-success fa-2x"></i>
+    <div class="register-card">
+        <!-- Dual Header Top Box -->
+        <div class="register-header-purple">
+            <div class="d-inline-flex align-items-center justify-content-center p-2 rounded-circle mb-2" style="background: rgba(255, 255, 255, 0.2); width: 44px; height: 44px;">
+                <i class="fa fa-user-plus text-white fa-lg"></i>
             </div>
-            <h4 class="fw-bold text-light mb-0">Registrasi Akun Baru</h4>
-            <div class="small text-muted text-uppercase" style="font-size: 0.72rem; letter-spacing: 1px;">
+            <h4 class="fw-bold text-white mb-0">Registrasi Akun Baru</h4>
+            <div class="small text-white-50 text-uppercase" style="font-size: 0.68rem; letter-spacing: 1px;">
                 CALIBRAMED Medical Equipment Management System
             </div>
         </div>
 
-        <!-- Form Registrasi -->
-        <form method="POST" action="register.php" id="registerForm">
-            <!-- Email -->
-            <div class="mb-3">
-                <label class="form-label small text-secondary">Alamat Email <span class="text-danger">*</span></label>
-                <div class="input-group">
-                    <span class="input-group-text bg-dark border-secondary text-info"><i class="fa fa-envelope"></i></span>
-                    <input type="email" name="email" class="form-control" placeholder="nama@faskes.com" required>
+        <div class="p-4">
+            <!-- Form Registrasi -->
+            <form method="POST" action="register.php" id="registerForm">
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">Alamat Email <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="email" class="form-control" placeholder="nama@faskes.com" required>
+                    </div>
                 </div>
+
+                <!-- Nama Awal & Nama Akhir -->
+                <div class="row g-2 mb-2">
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted fw-bold">Nama Awal <span class="text-danger">*</span></label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Contoh: Budi" required oninput="previewUsername()">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted fw-bold">Nama Akhir <span class="text-danger">*</span></label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Contoh: Santoso" required oninput="previewUsername()">
+                    </div>
+                    <div class="col-12 mt-1">
+                        <small class="text-muted" style="font-size: 0.75rem;">
+                            <i class="fa fa-info-circle me-1 text-primary"></i>Username otomatis dibentuk: <strong id="username_preview" class="text-primary">-</strong>
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Pilihan Peran (Role) -->
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">Pilihan Peran Pengguna <span class="text-danger">*</span></label>
+                    <select name="role" id="role_select" class="form-select" onchange="toggleHospitalField()" required>
+                        <option value="klien">🏥 Klien Rumah Sakit / Faskes (Customer View)</option>
+                        <option value="teknisi">🔧 Teknisi PT (Biomedical Calibration Engineer)</option>
+                    </select>
+                </div>
+
+                <!-- Pilih RS (Hanya Muncul Jika Peran = Klien) -->
+                <div class="mb-3" id="hospital_field">
+                    <label class="form-label small text-muted fw-bold">Pilih Fasilitas Kesehatan Mitra</label>
+                    <select name="hospital_id" class="form-select">
+                        <option value="">-- Pilih Rumah Sakit Anda --</option>
+                        <?php foreach ($hospitals as $h): ?>
+                            <option value="<?= $h['id'] ?>"><?= htmlspecialchars($h['name']) ?> (<?= htmlspecialchars($h['city']) ?>)</option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <!-- Password & Konfirmasi -->
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted fw-bold">Kata Sandi <span class="text-danger">*</span></label>
+                        <input type="password" name="password" class="form-control" placeholder="Min 6 karakter" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted fw-bold">Konfirmasi Sandi <span class="text-danger">*</span></label>
+                        <input type="password" name="confirm_password" class="form-control" placeholder="Ulangi sandi" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-calibra-primary w-100 py-2 mb-3">
+                    <i class="fa fa-user-check me-1"></i> Daftar Sekarang
+                </button>
+            </form>
+
+            <div class="text-center mt-1">
+                <small class="text-muted">
+                    Sudah memiliki akun? <a href="login.php" class="text-success text-decoration-none fw-bold">Masuk di sini</a>
+                </small>
             </div>
-
-            <!-- Nama Awal & Nama Akhir (Otomatis Membentuk Username) -->
-            <div class="row g-2 mb-3">
-                <div class="col-md-6">
-                    <label class="form-label small text-secondary">Nama Awal <span class="text-danger">*</span></label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Contoh: Budi" required oninput="previewUsername()">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label small text-secondary">Nama Akhir <span class="text-danger">*</span></label>
-                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Contoh: Santoso" required oninput="previewUsername()">
-                </div>
-                <div class="col-12 mt-1">
-                    <small class="text-muted" style="font-size: 0.75rem;">
-                        <i class="fa fa-info-circle me-1 text-info"></i>Username otomatis dibentuk: <strong id="username_preview" class="text-info">-</strong>
-                    </small>
-                </div>
-            </div>
-
-            <!-- Pilihan Peran (Role) -->
-            <div class="mb-3">
-                <label class="form-label small text-secondary">Pilihan Peran Pengguna <span class="text-danger">*</span></label>
-                <select name="role" id="role_select" class="form-select" onchange="toggleHospitalField()" required>
-                    <option value="klien">🏥 Klien Rumah Sakit / Faskes (Customer View)</option>
-                    <option value="teknisi">🔧 Teknisi PT (Biomedical Calibration Engineer)</option>
-                </select>
-            </div>
-
-            <!-- Pilih RS (Hanya Muncul Jika Peran = Klien) -->
-            <div class="mb-3" id="hospital_field">
-                <label class="form-label small text-secondary">Pilih Fasilitas Kesehatan Mitra</label>
-                <select name="hospital_id" class="form-select">
-                    <option value="">-- Pilih Rumah Sakit Anda --</option>
-                    <?php foreach ($hospitals as $h): ?>
-                        <option value="<?= $h['id'] ?>"><?= htmlspecialchars($h['name']) ?> (<?= htmlspecialchars($h['city']) ?>)</option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <!-- Password & Konfirmasi -->
-            <div class="row g-2 mb-4">
-                <div class="col-md-6">
-                    <label class="form-label small text-secondary">Kata Sandi <span class="text-danger">*</span></label>
-                    <input type="password" name="password" class="form-control" placeholder="Min 6 karakter" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label small text-secondary">Konfirmasi Sandi <span class="text-danger">*</span></label>
-                    <input type="password" name="confirm_password" class="form-control" placeholder="Ulangi sandi" required>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-calibra-success w-100 py-2 mb-3">
-                <i class="fa fa-user-check me-1"></i> Daftar Sekarang
-            </button>
-        </form>
-
-        <div class="text-center mt-2">
-            <small class="text-muted">
-                Sudah memiliki akun? <a href="login.php" class="text-info text-decoration-none fw-medium">Masuk di sini</a>
-            </small>
         </div>
     </div>
 

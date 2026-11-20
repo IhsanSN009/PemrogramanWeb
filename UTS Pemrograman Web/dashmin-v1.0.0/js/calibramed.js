@@ -1,6 +1,6 @@
 /**
- * CALIBRAMED SYSTEM - JavaScript Controller
- * Chart.js, Live Multi-Search, SweetAlert2 Interactivity, & Modal Handlers
+ * CALIBRAMED SYSTEM - JavaScript Controller (PolluxUI Theme)
+ * Chart.js Light Mode, Live Multi-Search, SweetAlert2 Light Theme, & Modal Handlers
  */
 
 $(document).ready(function () {
@@ -11,7 +11,7 @@ $(document).ready(function () {
 });
 
 // ---------------------------------------------------------------------
-// 1. Live Timestamp Clock
+// 1. Live Timestamp Clock (Format Indonesia)
 // ---------------------------------------------------------------------
 function updateLiveClock() {
     const now = new Date();
@@ -28,13 +28,13 @@ function updateLiveClock() {
 }
 
 // ---------------------------------------------------------------------
-// 2. Chart.js Data Visualizations
+// 2. Chart.js Data Visualizations (PolluxUI Palette)
 // ---------------------------------------------------------------------
 let hospitalChartInstance = null;
 let conditionChartInstance = null;
 
 function initCharts() {
-    // A. Grafik Pengerjaan Tiap Rumah Sakit (10 RS Mitra)
+    // A. Grafik Pengerjaan Tiap Rumah Sakit (10 RS Mitra) - Multi-colored Bar Chart
     const ctxHospital = document.getElementById("hospital-progress-chart");
     if (ctxHospital && window.hospitalChartData) {
         hospitalChartInstance = new Chart(ctxHospital.getContext("2d"), {
@@ -45,32 +45,32 @@ function initCharts() {
                     {
                         label: "Target Alat",
                         data: window.hospitalChartData.targets,
-                        backgroundColor: "rgba(14, 165, 233, 0.75)",
-                        borderColor: "#38bdf8",
+                        backgroundColor: "#6f42c1", // Pollux Purple
+                        borderColor: "#593196",
                         borderWidth: 1,
                         borderRadius: 3
                     },
                     {
                         label: "Selesai & Layak",
                         data: window.hospitalChartData.completed,
-                        backgroundColor: "rgba(34, 197, 94, 0.75)",
-                        borderColor: "#4ade80",
+                        backgroundColor: "#00c292", // Pollux Teal
+                        borderColor: "#00a87e",
                         borderWidth: 1,
                         borderRadius: 3
                     },
                     {
                         label: "Maintenance",
                         data: window.hospitalChartData.maintenance,
-                        backgroundColor: "rgba(245, 158, 11, 0.75)",
-                        borderColor: "#fbbf24",
+                        backgroundColor: "#f1b44c", // Pollux Orange
+                        borderColor: "#d99726",
                         borderWidth: 1,
                         borderRadius: 3
                     },
                     {
                         label: "Karantina / Rusak",
                         data: window.hospitalChartData.quarantine,
-                        backgroundColor: "rgba(244, 63, 94, 0.75)",
-                        borderColor: "#fb7185",
+                        backgroundColor: "#f46a6a", // Pollux Coral Red
+                        borderColor: "#d64747",
                         borderWidth: 1,
                         borderRadius: 3
                     }
@@ -83,38 +83,37 @@ function initCharts() {
                     legend: {
                         position: 'top',
                         labels: {
-                            color: '#cbd5e1',
-                            font: { family: 'Plus Jakarta Sans', size: 11, weight: '500' },
+                            color: '#495057',
+                            font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
                             padding: 12,
                             usePointStyle: true,
-                            boxWidth: 7
+                            boxWidth: 8
                         }
                     },
                     tooltip: {
-                        backgroundColor: '#0f172a',
-                        titleColor: '#38bdf8',
-                        bodyColor: '#f8fafc',
-                        borderColor: '#334155',
-                        borderWidth: 1,
+                        backgroundColor: '#2a3042',
+                        titleColor: '#00c292',
+                        bodyColor: '#ffffff',
+                        borderWidth: 0,
                         padding: 10
                     }
                 },
                 scales: {
                     x: {
-                        ticks: { color: '#94a3b8', font: { size: 10 } },
-                        grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                        ticks: { color: '#6c757d', font: { size: 10 } },
+                        grid: { color: 'rgba(0, 0, 0, 0.04)' }
                     },
                     y: {
                         beginAtZero: true,
-                        ticks: { color: '#94a3b8', font: { size: 10 } },
-                        grid: { color: 'rgba(51, 65, 85, 0.3)' }
+                        ticks: { color: '#6c757d', font: { size: 10 } },
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' }
                     }
                 }
             }
         });
     }
 
-    // B. Donut Chart Distribusi Kelaikan
+    // B. Donut Chart Distribusi Kelaikan (PolluxUI Vibrant Slice Palette)
     const ctxCondition = document.getElementById("equipment-condition-chart");
     if (ctxCondition && window.conditionCounts) {
         conditionChartInstance = new Chart(ctxCondition.getContext("2d"), {
@@ -127,25 +126,29 @@ function initCharts() {
                         window.conditionCounts.bersyarat,
                         window.conditionCounts.rusak
                     ],
-                    backgroundColor: ["#22c55e", "#f59e0b", "#f43f5e"],
-                    borderColor: "#1e293b",
-                    borderWidth: 2,
+                    backgroundColor: [
+                        "#00c292", // Vibrant Teal
+                        "#f1b44c", // Amber Gold
+                        "#f46a6a"  // Coral Red
+                    ],
+                    borderColor: "#ffffff",
+                    borderWidth: 3,
                     hoverOffset: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                cutout: '72%',
+                cutout: '70%',
                 plugins: {
                     legend: {
                         position: 'bottom',
                         labels: {
-                            color: '#cbd5e1',
-                            font: { family: 'Plus Jakarta Sans', size: 10.5 },
+                            color: '#495057',
+                            font: { family: 'Plus Jakarta Sans', size: 11, weight: '500' },
                             padding: 10,
                             usePointStyle: true,
-                            boxWidth: 7
+                            boxWidth: 8
                         }
                     }
                 }
@@ -159,7 +162,13 @@ function initCharts() {
 // ---------------------------------------------------------------------
 function initFilterHandlers() {
     $("#filter-hospital, #filter-condition, #filter-status, #filter-type, #filter-cycle").on("change", applyFilters);
-    $("#search-device").on("keyup input", applyFilters);
+    $("#search-device, #nav-search-device").on("keyup input", function () {
+        // Sinkronisasi nilai jika diketik di search bar navbar atau search bar tabel
+        const val = $(this).val();
+        $("#search-device").val(val);
+        $("#nav-search-device").val(val);
+        applyFilters();
+    });
 }
 
 function applyFilters() {
@@ -180,7 +189,7 @@ function applyFilters() {
         const type  = (row.data("type") || "").toLowerCase();
         const cycle = (row.data("cycle") || "").toLowerCase();
 
-        // Multi-search target text: includes name, code, brand, room, hospital
+        // Multi-search target text
         const searchText = (row.data("search") || "").toLowerCase();
 
         const matchHosp  = !selectedHospital || hosp === selectedHospital;
@@ -216,18 +225,19 @@ function resetFilters() {
     $("#filter-type").val("");
     $("#filter-cycle").val("");
     $("#search-device").val("");
+    $("#nav-search-device").val("");
     applyFilters();
 }
 
 // ---------------------------------------------------------------------
-// 4. Modal Detail Alat & Inspeksi Metrologi
+// 4. Modal Detail Alat & Inspeksi Metrologi (SweetAlert2 Light Mode)
 // ---------------------------------------------------------------------
 function openDetailModal(deviceId) {
     Swal.fire({
         title: 'Memuat Data Alat...',
         allowOutsideClick: false,
-        background: '#1e293b',
-        color: '#f8fafc',
+        background: '#ffffff',
+        color: '#2a3042',
         didOpen: () => { Swal.showLoading(); }
     });
 
@@ -270,13 +280,13 @@ function openDetailModal(deviceId) {
                 if (dev.logs && dev.logs.length > 0) {
                     dev.logs.forEach(log => {
                         logsList.append(`
-                            <div class="p-2 mb-2 rounded" style="background:#0f172a; border-left: 3px solid #0ea5e9;">
+                            <div class="p-2 mb-2 rounded" style="background:#f8f9fa; border-left: 3px solid #00c292;">
                                 <div class="d-flex justify-content-between small">
-                                    <strong class="text-light">${log.action_type}</strong>
+                                    <strong class="text-dark">${log.action_type}</strong>
                                     <span class="text-muted">${log.log_date}</span>
                                 </div>
                                 <div class="small text-secondary">${log.findings} &bull; ${log.action_taken}</div>
-                                <div class="small text-info">Oleh: ${log.tech_name}</div>
+                                <div class="small text-success">Oleh: ${log.tech_name}</div>
                             </div>
                         `);
                     });
@@ -291,8 +301,8 @@ function openDetailModal(deviceId) {
                     icon: 'error',
                     title: 'Gagal',
                     text: res.message,
-                    background: '#1e293b',
-                    color: '#f8fafc'
+                    background: '#ffffff',
+                    color: '#2a3042'
                 });
             }
         },
@@ -301,8 +311,8 @@ function openDetailModal(deviceId) {
                 icon: 'error',
                 title: 'Error Jaringan',
                 text: 'Tidak dapat menghubungi server lokal.',
-                background: '#1e293b',
-                color: '#f8fafc'
+                background: '#ffffff',
+                color: '#2a3042'
             });
         }
     });
@@ -318,8 +328,8 @@ function submitInspection() {
     Swal.fire({
         title: 'Menyimpan Pembaruan...',
         allowOutsideClick: false,
-        background: '#1e293b',
-        color: '#f8fafc',
+        background: '#ffffff',
+        color: '#2a3042',
         didOpen: () => { Swal.showLoading(); }
     });
 
@@ -336,8 +346,8 @@ function submitInspection() {
                     icon: 'success',
                     title: 'Berhasil!',
                     text: res.message,
-                    background: '#1e293b',
-                    color: '#f8fafc',
+                    background: '#ffffff',
+                    color: '#2a3042',
                     timer: 1600,
                     showConfirmButton: false
                 }).then(() => {
@@ -348,8 +358,8 @@ function submitInspection() {
                     icon: 'error',
                     title: 'Gagal Memperbarui',
                     text: res.message,
-                    background: '#1e293b',
-                    color: '#f8fafc'
+                    background: '#ffffff',
+                    color: '#2a3042'
                 });
             }
         },
@@ -358,8 +368,8 @@ function submitInspection() {
                 icon: 'error',
                 title: 'Kesalahan Sistem',
                 text: 'Gagal mengirim data inspeksi ke server.',
-                background: '#1e293b',
-                color: '#f8fafc'
+                background: '#ffffff',
+                color: '#2a3042'
             });
         }
     });
@@ -375,8 +385,8 @@ function submitNewDevice() {
     Swal.fire({
         title: 'Mendaftarkan Alat...',
         allowOutsideClick: false,
-        background: '#1e293b',
-        color: '#f8fafc',
+        background: '#ffffff',
+        color: '#2a3042',
         didOpen: () => { Swal.showLoading(); }
     });
 
@@ -393,9 +403,9 @@ function submitNewDevice() {
                     icon: 'success',
                     title: 'Pendaftaran Sukses!',
                     text: res.message,
-                    background: '#1e293b',
-                    color: '#f8fafc',
-                    confirmButtonColor: '#10b981'
+                    background: '#ffffff',
+                    color: '#2a3042',
+                    confirmButtonColor: '#00c292'
                 }).then(() => {
                     location.reload();
                 });
@@ -404,8 +414,8 @@ function submitNewDevice() {
                     icon: 'error',
                     title: 'Gagal Menambah Alat',
                     text: res.message,
-                    background: '#1e293b',
-                    color: '#f8fafc'
+                    background: '#ffffff',
+                    color: '#2a3042'
                 });
             }
         },
@@ -414,8 +424,8 @@ function submitNewDevice() {
                 icon: 'error',
                 title: 'Kesalahan Sistem',
                 text: 'Gagal memproses pendaftaran alat baru.',
-                background: '#1e293b',
-                color: '#f8fafc'
+                background: '#ffffff',
+                color: '#2a3042'
             });
         }
     });
@@ -428,8 +438,8 @@ function switchOwnerRole(role, hospitalId) {
     Swal.fire({
         title: 'Mengubah Mode Tampilan...',
         allowOutsideClick: false,
-        background: '#1e293b',
-        color: '#f8fafc',
+        background: '#ffffff',
+        color: '#2a3042',
         didOpen: () => { Swal.showLoading(); }
     });
 
@@ -443,8 +453,8 @@ function switchOwnerRole(role, hospitalId) {
                 icon: 'info',
                 title: 'Mode Berhasil Diubah',
                 text: res.message,
-                background: '#1e293b',
-                color: '#f8fafc',
+                background: '#ffffff',
+                color: '#2a3042',
                 timer: 1300,
                 showConfirmButton: false
             }).then(() => {
@@ -455,7 +465,7 @@ function switchOwnerRole(role, hospitalId) {
 }
 
 // ---------------------------------------------------------------------
-// 8. Konfirmasi Logout dengan SweetAlert2
+// 8. Konfirmasi Logout dengan SweetAlert2 (Light Mode)
 // ---------------------------------------------------------------------
 function confirmLogout() {
     Swal.fire({
@@ -463,18 +473,18 @@ function confirmLogout() {
         text: 'Apakah Anda yakin ingin keluar dari CALIBRAMED SYSTEM?',
         icon: 'question',
         showCancelButton: true,
-        confirmButtonColor: '#ef4444',
-        cancelButtonColor: '#475569',
+        confirmButtonColor: '#f46a6a',
+        cancelButtonColor: '#74788d',
         confirmButtonText: '<i class="fa fa-sign-out-alt me-1"></i> Ya, Keluar',
         cancelButtonText: 'Batal',
-        background: '#1e293b',
-        color: '#f8fafc'
+        background: '#ffffff',
+        color: '#2a3042'
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({
                 title: 'Mengeluarkan Sesi...',
-                background: '#1e293b',
-                color: '#f8fafc',
+                background: '#ffffff',
+                color: '#2a3042',
                 timer: 900,
                 showConfirmButton: false
             }).then(() => {
